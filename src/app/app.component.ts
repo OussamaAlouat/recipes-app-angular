@@ -7,4 +7,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angularBasics';
+
+  public feature: string;
+
+  constructor() {
+    this.feature = 'recipe';
+  }
+
+  onNavigate(feature: string) {
+    this.feature = feature;
+    console.log('feature: ', feature);
+  }
 }
