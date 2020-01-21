@@ -3,12 +3,6 @@
     <app-recipe-list></app-recipe-list>
   </div>
   <div class="col-md-7">
-    <div *ngIf="!recivedRecipe">Please select a recipe!</div>
-    <app-recipe-detail
-      *ngIf="recivedRecipe"
-      [recipe] = "recivedRecipe"
-    >
-    </app-recipe-detail
-    >
+    <router-outlet></router-outlet>
   </div>
 </div>
