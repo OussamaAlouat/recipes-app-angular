@@ -59,19 +59,25 @@
         </div>
 
 
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="row">
+        <div class="row" v-if="editMode">
+          <div class="col-xs-12" formArrayName="ingredients">
+            <div class="row"
+              *ngFor="let ingredientCtrl of controls; let i = index;"
+              style="margin-top: 10px;"
+              [formGroupName]="i"
+            >
               <div class="col-xs-8">
                 <input
                   type="text"
                   class="form-control"
+                  formControlName="name"
                 >
               </div>
               <div class="col-xs-2">
                 <input
                   type="number"
                   class="form-control"
+                  formControlName="amount"
                 >
               </div>
               <div class="col-xs-2">
