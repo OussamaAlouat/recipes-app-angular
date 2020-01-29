@@ -10,7 +10,7 @@ export class RecipeService {
   public recipesChanged: Subject<Recipe []>;
 
   constructor(private slService: ShoppingListService) {
-    this.recipes = [
+/*    this.recipes = [
       new Recipe('A test recipe',
         'This is a simple test',
         'https://keyassets-p2.timeincuk.net/wp/prod/wp-content/uploads/sites/53/2019/02/Cheesy-mince-pasta-bake.jpg',
@@ -22,7 +22,8 @@ export class RecipeService {
         [new Ingredient('patato', 20)]
       ),
     ];
-
+  */
+    this.recipes = [];
     this.recipesChanged = new Subject();
   }
 
