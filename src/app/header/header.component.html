@@ -9,6 +9,7 @@
           <a
             [routerLink]="['recipes']"
             [routerLinkActive]="['active']"
+            *ngIf="isAutenticated"
           >
             Recipes
           </a>
@@ -17,6 +18,7 @@
           <a
             [routerLink]="['/auth']"
             [routerLinkActive]="['active']"
+            *ngIf="!isAutenticated"
           >
             Authenticate
           </a>
@@ -25,13 +27,17 @@
           <a
             [routerLink]="['shopping-list']"
             [routerLinkActive]="['active']"
+            *ngIf="isAutenticated"
           >
             Shopping List
           </a>
         </li>
 
       </ul>
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right" ngIf="isAutenticated">
+        <li>
+          <a style="cursor: pointer;" *>Logout</a>
+        </li>
         <li class="dropdown" appDropdown>
           <a style="cursor: pointer;" class="dropdown-toggle" role="button">
             Manage
