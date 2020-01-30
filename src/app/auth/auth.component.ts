@@ -10,11 +10,13 @@ import { AuthService } from './auth.service';
 export class AuthComponent {
   public isLoginMode:boolean;
   public isLoading: boolean;
+  public error: string;
 
 
   constructor(private authService: AuthService) {
     this.isLoginMode = true;
     this.isLoading = false;
+    this.error = null;
   }
 
   onSwitchMode() {
@@ -36,10 +38,11 @@ export class AuthComponent {
       this.authService.signup(email, password).subscribe(
         (data) => {
           console.log(data);
-          setTimeout(() => {
-            this.isLoading = false;
-            form.reset();
-          },2000)
+          this.isLoading = false;
+          form.reset();
+        }, err => {
+          this.error = err;
+          this.isLoading = false;
         }
       );
     }
