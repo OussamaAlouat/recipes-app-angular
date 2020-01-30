@@ -34,6 +34,12 @@ export class AuthComponent {
     this.isLoading = true;
     if (this.isLoginMode) {
       // Login method
+      this.authService.login(email, password).subscribe(
+        (resData) => {
+          console.log(resData);
+          this.isLoading = false;
+        }
+      )
     } else {
       this.authService.signup(email, password).subscribe(
         (data) => {
