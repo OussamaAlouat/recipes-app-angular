@@ -9,10 +9,12 @@ import { AuthService } from './auth.service';
 })
 export class AuthComponent {
   public isLoginMode:boolean;
+  public isLoading: boolean;
 
 
   constructor(private authService: AuthService) {
     this.isLoginMode = true;
+    this.isLoading = false;
   }
 
   onSwitchMode() {
@@ -25,15 +27,19 @@ export class AuthComponent {
       return ;
     }
 
+    const email = form.value.email;
+    const password = form.value.password;
+    this.isLoading = true;
     if (this.isLoginMode) {
       // Login method
     } else {
-      const email = form.value.email;
-      const password = form.value.password;
       this.authService.signup(email, password).subscribe(
         (data) => {
           console.log(data);
-          form.reset();
+          setTimeout(() => {
+            this.isLoading = false;
+            form.reset();
+          },2000)
         }
       );
     }
