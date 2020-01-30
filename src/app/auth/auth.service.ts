@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { VariablesNeeded } from 'variables';
 import { catchError, tap } from 'rxjs/operators';
-import { throwError, Subject } from 'rxjs';
+import { throwError, BehaviorSubject } from 'rxjs';
 import { User } from './user.model';
 
 export interface AuthResponseData {
@@ -17,13 +17,13 @@ export interface AuthResponseData {
 
 @Injectable({ providedIn: 'root'})
 export class AuthService {
-  public user: Subject<User>;
+  public user: BehaviorSubject<User>;
 
   constructor(
     private http: HttpClient,
     private variables: VariablesNeeded
   ) {
-    this.user = new Subject();
+    this.user = new BehaviorSubject(null);
   }
 
   signup(email: string, password: string) {
