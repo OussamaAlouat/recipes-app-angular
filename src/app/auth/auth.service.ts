@@ -4,6 +4,7 @@ import { VariablesNeeded } from 'variables';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError, BehaviorSubject } from 'rxjs';
 import { User } from './user.model';
+import { Router } from '@angular/router';
 
 export interface AuthResponseData {
   kind: string,
@@ -21,7 +22,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private variables: VariablesNeeded
+    private variables: VariablesNeeded,
+    private router: Router,
   ) {
     this.user = new BehaviorSubject(null);
   }
@@ -50,6 +52,11 @@ export class AuthService {
     ).pipe(catchError(this.handleError), tap(resData => {
       this.handleAutentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
     }));
+  }
+
+  logout() {
+    this.user.next(null);
+    this.router.navigate(['/auth']);
   }
 
   private handleAutentication(email: string,userId: string ,token: string, expiresIn: number, ) {
