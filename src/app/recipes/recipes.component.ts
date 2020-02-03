@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from './recipe.model';
+import { LoggingService } from '../logging.service';
 
 @Component({
   selector: 'app-recipes',
@@ -8,7 +9,10 @@ import { Recipe } from './recipe.model';
 })
 export class RecipesComponent implements OnInit {
   public recivedRecipe: Recipe;
-  constructor() {}
+  constructor(private loggingService: LoggingService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loggingService.printLog('Hello from Recipes ngOnInit');
+
+  }
 }
