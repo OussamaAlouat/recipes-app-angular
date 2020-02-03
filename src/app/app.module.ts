@@ -11,7 +11,6 @@ import { RecipeService } from './recipes/recipe.service';
 import { AuthComponent } from './auth/auth.component';
 import { VariablesNeeded } from 'variables';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
-import { AlertComponent } from './shared/alert/alert.component';
 
 import { RecipesModule } from './recipes/recipes.module';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
@@ -22,7 +21,6 @@ import { SharedModue } from './shared/shared.module';
     AppComponent,
     HeaderComponent,
     AuthComponent,
-    AlertComponent,
   ],
   imports: [
     BrowserModule,
