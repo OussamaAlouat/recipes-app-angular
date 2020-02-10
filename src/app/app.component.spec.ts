@@ -4,7 +4,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { VariablesNeeded } from '../../variables';
 import { LoggingService } from './logging.service';
 import { RecipeService } from './recipes/recipe.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
@@ -21,7 +20,6 @@ describe('AppComponent', () => {
         HeaderComponent,
       ],
       providers: [
-        VariablesNeeded,
         LoggingService,
         RecipeService,
         ShoppingListService

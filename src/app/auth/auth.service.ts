@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { VariablesNeeded } from 'variables';
+// import { VariablesNeeded } from 'variables';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError, BehaviorSubject } from 'rxjs';
 import { User } from './user.model';
@@ -23,7 +23,6 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private variables: VariablesNeeded,
     private router: Router,
   ) {
     this.user = new BehaviorSubject(null);
@@ -31,7 +30,7 @@ export class AuthService {
 
   signup(email: string, password: string) {
     return this.http.post<AuthResponseData>(
-      `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${this.variables.firebaseKey}`,
+      `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=Yourkey`,
       {
         email: email,
         password: password,
@@ -44,7 +43,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http.post<AuthResponseData>(
-      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.variables.firebaseKey}`,
+      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=YourKey`,
       {
         email: email,
         password: password,
