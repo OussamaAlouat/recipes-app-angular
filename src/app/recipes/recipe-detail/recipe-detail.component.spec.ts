@@ -1,6 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute, Router, Route } from '@angular/router';
 
 import { RecipeDetailComponent } from './recipe-detail.component';
+
+import { RecipeService } from '../recipe.service';
+import { ShoppingListService } from '../../shopping-list/shopping-list.service';
+import { of } from 'rxjs';
+import { MockRecipeService } from 'src/__mocks__/RecipeService.component';
+
 
 describe('RecipeDetailComponent', () => {
   let component: RecipeDetailComponent;
@@ -8,7 +15,20 @@ describe('RecipeDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RecipeDetailComponent ]
+      declarations: [ RecipeDetailComponent ],
+      providers: [
+        {
+          provide: RecipeService,
+          useClass: MockRecipeService,
+
+        }, ShoppingListService,
+        { provide: Router },
+        { provide: ActivatedRoute,
+          useValue: {
+            params: of({ id : 1 })
+          }
+        }
+      ]
     })
     .compileComponents();
   }));
