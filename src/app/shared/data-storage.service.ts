@@ -18,16 +18,18 @@ export class DataStorageService {
 
   storeRecipes(){
     const recipes = this.recipeService.getRecipes();
-    this.http.put('https://recipes-back-34722.firebaseio.com/recipes.json', recipes)
+    console.log(recipes);
+    this.http.post('http://localhost:3000/recipes', recipes)
     .subscribe((response) => {
       console.log(response);
     });
   }
 
   fetchRecipes() {
-    return this.http.get<Recipe[]>('https://recipes-back-34722.firebaseio.com/recipes.json')
+    return this.http.get<Recipe[]>('http://localhost:3000/recipes')
     .pipe(
       map(recipes => {
+        console.log('recipes: ', recipes);
         return recipes.map(recipe => {
           return { ...recipe, ingredients: recipe.ingredients ? recipe.ingredients : []}
         });
