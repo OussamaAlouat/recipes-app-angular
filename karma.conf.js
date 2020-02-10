@@ -1,3 +1,6 @@
+/* eslint-disable func-names */
+/* eslint-disable global-require */
+/* eslint-disable import/no-extraneous-dependencies */
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
@@ -13,6 +16,7 @@ module.exports = function (config) {
       require('@angular-devkit/build-angular/plugins/karma')
     ],
     client: {
+      // eslint-disable-next-line comma-dangle
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     coverageIstanbulReporter: {
