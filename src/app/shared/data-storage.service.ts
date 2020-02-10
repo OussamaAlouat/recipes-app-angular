@@ -18,10 +18,16 @@ export class DataStorageService {
 
   storeRecipes(){
     const recipes = this.recipeService.getRecipes();
-    console.log(recipes);
-    this.http.post('http://localhost:3000/recipes', recipes)
-    .subscribe((response) => {
-      console.log(response);
+    for (let i = 0; i < recipes.length; i++) {
+      this.storeOneRecipe(recipes[i]);
+    }
+
+  }
+
+  storeOneRecipe(recipe) {
+    this.http.post('http://localhost:3000/recipes', recipe)
+      .subscribe((response) => {
+        console.log(response);
     });
   }
 
