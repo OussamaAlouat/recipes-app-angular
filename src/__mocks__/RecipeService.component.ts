@@ -22,4 +22,7 @@ export class MockRecipeService {
     return first(this.recipes);
   }
 
+  getRecipes() {
+    return this.recipes;
+  }
 }
