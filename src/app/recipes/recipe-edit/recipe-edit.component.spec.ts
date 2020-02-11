@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RecipeEditComponent } from './recipe-edit.component';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -98,7 +98,7 @@ describe('RecipeEditComponent', () => {
   });
 
   describe('When submit the form', () => {
-    fit('onSubmit function should be called', () => {
+    it('onSubmit function should be called', () => {
       spyOn(component, 'onSubmit');
       component.recipeForm.controls.name.setValue('Tests');
       component.recipeForm.controls.description.setValue('Description test');
@@ -109,5 +109,17 @@ describe('RecipeEditComponent', () => {
       fixture.detectChanges();
       expect(component.onSubmit).toHaveBeenCalledTimes(1);
     });
+
+    it('redirectToRecipes function should be called', fakeAsync(() => {
+      spyOn(component , 'redirectToRecipes');
+      component.recipeForm.controls.name.setValue('Tests');
+      component.recipeForm.controls.description.setValue('Description test');
+      component.recipeForm.controls.imagePath.setValue('This is the image path');
+      fixture.detectChanges();
+      const saveButton =fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement;
+      saveButton.click();
+      fixture.detectChanges();
+      expect(component.redirectToRecipes).toHaveBeenCalledTimes(1);
+    }));
   });
 });
