@@ -71,7 +71,7 @@ export class RecipeEditComponent implements OnInit {
       this.recipeService.addRecipe(this.recipeForm.value);
     }
 
-    this.onCancel();
+    this.redirectToRecipes();
   }
 
   get controls() { // a getter!
@@ -88,6 +88,10 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onCancel() {
+    this.redirectToRecipes();
+  }
+
+  redirectToRecipes() {
     this.router.navigate(['../'], {relativeTo: this.route});
   }
 
