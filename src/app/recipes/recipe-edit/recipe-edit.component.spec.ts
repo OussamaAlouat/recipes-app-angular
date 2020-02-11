@@ -95,5 +95,19 @@ describe('RecipeEditComponent', () => {
       const saveButton =fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement;
       expect(saveButton.disabled).toBe(false);
     });
-  })
+  });
+
+  describe('When submit the form', () => {
+    fit('onSubmit function should be called', () => {
+      spyOn(component, 'onSubmit');
+      component.recipeForm.controls.name.setValue('Tests');
+      component.recipeForm.controls.description.setValue('Description test');
+      component.recipeForm.controls.imagePath.setValue('This is the image path');
+      fixture.detectChanges();
+      const saveButton =fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement;
+      saveButton.click();
+      fixture.detectChanges();
+      expect(component.onSubmit).toHaveBeenCalledTimes(1);
+    });
+  });
 });
