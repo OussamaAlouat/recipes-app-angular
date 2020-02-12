@@ -13,8 +13,8 @@ export class MockRecipeService {
       new Recipe('A test recipe',
           'This is a simple test',
           'https://keyassets-p2.timeincuk.net/wp/prod/wp-content/uploads/sites/53/2019/02/Cheesy-mince-pasta-bake.jpg',
-          [new Ingredient('Tomato', 2), new Ingredient('Meat', 1)]
-        ),
+          [new Ingredient('Tomato', 2), new Ingredient('Meat', 1)], 'Other'
+          )
     ];
   }
 
