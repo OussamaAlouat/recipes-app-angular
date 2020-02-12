@@ -6,6 +6,7 @@ import { DropdownDirective } from './dropdown.directive';
 import { CommonModule } from '@angular/common';
 import { FormInputComponent } from './form/form-input/form-input.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormTextAreaComponent } from './form/form-text-area/form-text-area.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     PlaceholderDirective,
     DropdownDirective,
     FormInputComponent,
+    FormTextAreaComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     DropdownDirective,
     CommonModule,
     FormInputComponent,
+    FormTextAreaComponent
   ],
   entryComponents: [
     AlertComponent,
