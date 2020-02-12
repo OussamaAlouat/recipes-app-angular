@@ -18,7 +18,7 @@ describe('RecipeItemComponent', () => {
 
   beforeEach(() => {
     const image = 'https://keyassets-p2.timeincuk.net/wp/prod/wp-content/uploads/sites/53/2019/02/Cheesy-mince-pasta-bake.jpg';
-    const recipe = new Recipe('Name', 'description', image, []);
+    const recipe = new Recipe('Name', 'description', image, [], 'Other');
     fixture = TestBed.createComponent(RecipeItemComponent);
     component = fixture.componentInstance;
     component.recipe = recipe;

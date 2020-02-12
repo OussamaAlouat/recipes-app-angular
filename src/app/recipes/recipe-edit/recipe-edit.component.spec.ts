@@ -11,6 +11,12 @@ import { By } from '@angular/platform-browser';
 describe('RecipeEditComponent', () => {
   let component: RecipeEditComponent;
   let fixture: ComponentFixture<RecipeEditComponent>;
+  const validTypes = [
+    false,
+    true,
+    false,
+    false
+  ];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -67,6 +73,12 @@ describe('RecipeEditComponent', () => {
       expect(component.recipeForm.valid).toBe(false);
       expect(component.recipeForm.controls.description.valid).toBe(false);
     });
+
+    it('The checkboxed typeOfRecipe is not selected, typeOfRecipe should be not valid', () => {
+      component.recipeForm.controls.typeOfRecipe.setValue([false, false, false, false]);
+      expect(component.recipeForm.valid).toBe(false);
+      expect(component.recipeForm.controls.typeOfRecipe.valid).toBe(false);
+    });
   });
 
   describe('The form elements should be valid, when', () => {
@@ -84,6 +96,11 @@ describe('RecipeEditComponent', () => {
       component.recipeForm.controls.imagePath.setValue('image');
       expect(component.recipeForm.controls.imagePath.valid).toBe(true);
     });
+
+    it('The typeOfRecipe elemet have one element selected', () => {
+      component.recipeForm.controls.typeOfRecipe.setValue(validTypes);
+      expect(component.recipeForm.controls.typeOfRecipe.valid).toBe(true);
+    });
   });
 
   describe('Form should be valid when', () => {
@@ -91,6 +108,7 @@ describe('RecipeEditComponent', () => {
       component.recipeForm.controls.name.setValue('Tests');
       component.recipeForm.controls.description.setValue('Description test');
       component.recipeForm.controls.imagePath.setValue('This is the image path');
+      component.recipeForm.controls.typeOfRecipe.setValue(validTypes);
       fixture.detectChanges();
       const saveButton =fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement;
       expect(saveButton.disabled).toBe(false);
@@ -103,6 +121,7 @@ describe('RecipeEditComponent', () => {
       component.recipeForm.controls.name.setValue('Tests');
       component.recipeForm.controls.description.setValue('Description test');
       component.recipeForm.controls.imagePath.setValue('This is the image path');
+      component.recipeForm.controls.typeOfRecipe.setValue(validTypes);
       fixture.detectChanges();
       const saveButton =fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement;
       saveButton.click();
@@ -115,6 +134,7 @@ describe('RecipeEditComponent', () => {
       component.recipeForm.controls.name.setValue('Tests');
       component.recipeForm.controls.description.setValue('Description test');
       component.recipeForm.controls.imagePath.setValue('This is the image path');
+      component.recipeForm.controls.typeOfRecipe.setValue(validTypes);
       fixture.detectChanges();
       const saveButton =fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement;
       saveButton.click();
