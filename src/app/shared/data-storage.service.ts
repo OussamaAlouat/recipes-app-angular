@@ -35,7 +35,6 @@ export class DataStorageService {
     return this.http.get<Recipe[]>('http://localhost:3000/recipes')
     .pipe(
       map(recipes => {
-        console.log('recipes: ', recipes);
         return recipes.map(recipe => {
           return { ...recipe, ingredients: recipe.ingredients ? recipe.ingredients : []}
         });

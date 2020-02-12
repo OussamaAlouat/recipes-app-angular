@@ -74,7 +74,6 @@ describe('Recipes routing', () => {
     router.navigate(["new"]);
     tick();
     expect(location.path()).toBe("/new");
-    console.log(location.path());
   }));
 
   it('navigate to "/1" location should be "/1"', fakeAsync(() => {
