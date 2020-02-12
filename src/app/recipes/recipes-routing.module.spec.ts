@@ -18,6 +18,7 @@ import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { MockRecipeService } from 'src/__mocks__/RecipeService.component';
 import { RecipesResolverServiceMock } from 'src/__mocks__/RecipeResolverServiceMock.service';
 import { FormInputComponent } from '../shared/form/form-input/form-input.component';
+import { FormTextAreaComponent } from '../shared/form/form-text-area/form-text-area.component';
 
 const routes: Routes = [
   {
@@ -53,7 +54,8 @@ describe('Recipes routing', () => {
         RecipeEditComponent,
         RecipeListComponent,
         RecipeItemComponent,
-        FormInputComponent
+        FormInputComponent,
+        FormTextAreaComponent
       ],
       providers: [
         LoggingService,
