@@ -7,6 +7,7 @@ import { RecipeService } from '../recipe.service';
 import { ShoppingListService } from '../../shopping-list/shopping-list.service';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
+import { FormInputComponent } from 'src/app/shared/form/form-input/form-input.component';
 
 describe('RecipeEditComponent', () => {
   let component: RecipeEditComponent;
@@ -20,7 +21,7 @@ describe('RecipeEditComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RecipeEditComponent ],
+      declarations: [ RecipeEditComponent, FormInputComponent ],
       providers: [
         RecipeService,
         ShoppingListService,
