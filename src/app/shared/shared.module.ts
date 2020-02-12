@@ -4,6 +4,8 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 import { PlaceholderDirective } from './placeholder/placeholder.directive';
 import { DropdownDirective } from './dropdown.directive';
 import { CommonModule } from '@angular/common';
+import { FormInputComponent } from './form/form-input/form-input.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -11,9 +13,11 @@ import { CommonModule } from '@angular/common';
     LoadingSpinnerComponent,
     PlaceholderDirective,
     DropdownDirective,
+    FormInputComponent,
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule
   ],
   exports: [
     AlertComponent,
@@ -21,6 +25,7 @@ import { CommonModule } from '@angular/common';
     PlaceholderDirective,
     DropdownDirective,
     CommonModule,
+    FormInputComponent,
   ],
   entryComponents: [
     AlertComponent,
