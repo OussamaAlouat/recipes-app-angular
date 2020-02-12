@@ -27,7 +27,8 @@
                 label="Name"
                 [controlledBy]="recipeForm"
                 controlName="name"
-              ></app-form-input>
+              >
+              </app-form-input>
             </div>
           </div>
         </div>
@@ -35,13 +36,13 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-              <label for="imagePath">Image</label>
-              <input
-                type="text"
+              <app-form-input
                 id="imagePath"
-                class="form-control"
-                formControlName="imagePath"
+                label="Image"
+                [controlledBy]="recipeForm"
+                controlName="imagePath"
               >
+              </app-form-input>
             </div>
           </div>
         </div>
@@ -55,16 +56,13 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-              <label for="description">Description</label>
-              <textarea
-                type="text"
-                id="description"
-                class="form-control"
+              <app-form-text-area
+                [controlledBy]="recipeForm"
+                controlName="description"
+                label="Description"
                 rows="6"
-                formControlName="description"
               >
-              </textarea
-              >
+              </app-form-text-area>
             </div>
           </div>
         </div>
