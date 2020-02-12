@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormInputComponent } from './form-input.component';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -6,10 +6,6 @@ import { Component, ViewChild, NO_ERRORS_SCHEMA } from '@angular/core';
 
 const label: string = 'Name';
 const controlName: string = 'name';
-const fackeForm: FormGroup = new FormGroup({
-  'name': new FormControl(null, Validators.required),
-});
-
 
 @Component({
   selector: 'app-test',
