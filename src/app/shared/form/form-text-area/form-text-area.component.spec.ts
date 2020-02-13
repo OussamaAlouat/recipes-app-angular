@@ -66,9 +66,9 @@ describe('FormTextAreaComponent', () => {
   it('The form input have data, should be valid', () => {
     component.controlledBy.controls.description.setValue('Test');
     fixture.detectChanges();
-    expect(hostComponent.controlledBy.valid).toBe(true);
-    expect(hostComponent.controlledBy.controls.description.valid).toBe(true);
-    expect(component.controlledBy.controls.description.valid).toBe(true);
+    expect(hostComponent.controlledBy.valid).toBeTruthy();
+    expect(hostComponent.controlledBy.controls.description.valid).toBeTruthy();
+    expect(component.controlledBy.controls.description.valid).toBeTruthy();
   });
 
   it('On invalid input, the class "ng-invaid" should appear', () => {

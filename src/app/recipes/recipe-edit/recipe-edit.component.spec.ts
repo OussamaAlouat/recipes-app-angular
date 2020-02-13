@@ -110,17 +110,17 @@ describe('RecipeEditComponent', () => {
   describe('The form elements should be valid, when', () => {
     it('The name elemet have content', () => {
       component.recipeForm.controls.name.setValue('Name test');
-      expect(component.recipeForm.controls.name.valid).toBe(true);
+      expect(component.recipeForm.controls.name.valid).toBeTruthy();
     });
 
     it('The description elemet have content', () => {
       component.recipeForm.controls.description.setValue('description test');
-      expect(component.recipeForm.controls.description.valid).toBe(true);
+      expect(component.recipeForm.controls.description.valid).toBeTruthy();
     });
 
     it('The imagePath elemet have content', () => {
       component.recipeForm.controls.imagePath.setValue('image');
-      expect(component.recipeForm.controls.imagePath.valid).toBe(true);
+      expect(component.recipeForm.controls.imagePath.valid).toBeTruthy();
     });
 
     it('The typeOfRecipe elemet have one element selected', () => {
@@ -132,7 +132,7 @@ describe('RecipeEditComponent', () => {
         formArray.push(control);
       });
 
-      expect(component.recipeForm.controls.typeOfRecipe.valid).toBe(true);
+      expect(component.recipeForm.controls.typeOfRecipe.valid).toBeTruthy();
     });
   });
 

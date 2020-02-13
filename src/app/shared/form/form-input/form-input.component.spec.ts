@@ -69,9 +69,9 @@ describe('FormInputComponent', () => {
   it('The form input have data, should be valid', () => {
     component.controlledBy.controls.name.setValue('Test');
     fixture.detectChanges();
-    expect(hostComponent.controlledBy.valid).toBe(true);
-    expect(hostComponent.controlledBy.controls.name.valid).toBe(true);
-    expect(component.controlledBy.controls.name.valid).toBe(true);
+    expect(hostComponent.controlledBy.valid).toBeTruthy();
+    expect(hostComponent.controlledBy.controls.name.valid).toBeTruthy();
+    expect(component.controlledBy.controls.name.valid).toBeTruthy();
   });
 
   it('On invalid input, the class "ng-invaid" should appear', () => {
