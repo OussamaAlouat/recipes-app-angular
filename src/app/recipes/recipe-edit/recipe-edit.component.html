@@ -61,7 +61,6 @@
           </div>
         </div>
 
-
         <div class="row">
           <div class="col-xs-12">
             <app-form-checkboxes
@@ -82,18 +81,19 @@
               [formGroupName]="i"
             >
               <div class="col-xs-8">
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="name"
+                <app-form-input
+                  [controlledBy]="ingredientCtrl"
+                  controlName="name"
                 >
+                </app-form-input>
               </div>
               <div class="col-xs-2">
-                <input
+                <app-form-input
+                  [controlledBy]="ingredientCtrl"
+                  controlName="amount"
                   type="number"
-                  class="form-control"
-                  formControlName="amount"
                 >
+                </app-form-input>
               </div>
               <div class="col-xs-2">
                 <app-button
