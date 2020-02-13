@@ -10,6 +10,7 @@ import { By } from '@angular/platform-browser';
 import { FormInputComponent } from 'src/app/shared/form/form-input/form-input.component';
 import { FormTextAreaComponent } from 'src/app/shared/form/form-text-area/form-text-area.component';
 import { FormCheckboxesComponent } from 'src/app/shared/form/form-checkboxes/form-checkboxes.component';
+import { ButtonComponent } from 'src/app/shared/button/button.component';
 
 // Function needed to validate checkboxes
 export function minSelectedCheckboxes (formArray: FormArray): {required: boolean} | null {
@@ -36,6 +37,7 @@ describe('RecipeEditComponent', () => {
         FormInputComponent,
         FormTextAreaComponent,
         FormCheckboxesComponent,
+        ButtonComponent,
       ],
       providers: [
         RecipeService,

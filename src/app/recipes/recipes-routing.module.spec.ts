@@ -20,6 +20,7 @@ import { RecipesResolverServiceMock } from 'src/__mocks__/RecipeResolverServiceM
 import { FormInputComponent } from '../shared/form/form-input/form-input.component';
 import { FormTextAreaComponent } from '../shared/form/form-text-area/form-text-area.component';
 import { FormCheckboxesComponent } from '../shared/form/form-checkboxes/form-checkboxes.component';
+import { ButtonComponent } from '../shared/button/button.component';
 
 const routes: Routes = [
   {
@@ -57,7 +58,8 @@ describe('Recipes routing', () => {
         RecipeItemComponent,
         FormInputComponent,
         FormTextAreaComponent,
-        FormCheckboxesComponent
+        FormCheckboxesComponent,
+        ButtonComponent
       ],
       providers: [
         LoggingService,
