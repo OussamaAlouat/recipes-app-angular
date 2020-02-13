@@ -28,9 +28,29 @@
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <button class="btn btn-success" type="submit" [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add' }}</button>
-          <button class="btn btn-danger" type="button" [disabled]="!editMode" (click)="onRemove()">Delete</button>
-          <button class="btn btn-prymary" type="button" (click)="onClearForm(f)">Clear</button>
+          <app-button
+            type="button"
+            styleClass="btn btn-success"
+            (clicked)="onRemove()"
+            [disable]="!f.valid"
+          >
+            {{ editMode ? 'Update' : 'Add' }}
+          </app-button>
+          <app-button
+            type="button"
+            styleClass="btn btn-danger"
+            (clicked)="onRemove()"
+            [disable]="!editMode"
+          >
+            Delete
+          </app-button>
+          <app-button
+            type="button"
+            styleClass="btn btn-prymary"
+            (clicked)="onClearForm(f)"
+          >
+            Clear
+          </app-button>
         </div>
       </div>
     </form>

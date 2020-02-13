@@ -16,7 +16,7 @@
             (clicked)="onCancel()"
           >
             Cancel
-        </app-button>
+          </app-button>
         </div>
 
         <div class="row">
@@ -96,13 +96,13 @@
                 >
               </div>
               <div class="col-xs-2">
-                <button
-                  class="btn btn-danger"
-                  (click)="onDeleteIngredient(i)"
+                <app-button
                   type="button"
+                  styleClass="btn btn-danger"
+                  (clicked)="onDeleteIngredient(i)"
                 >
                   X
-                </button>
+                </app-button>
               </div>
             </div>
             <hr>

@@ -2,7 +2,13 @@
 <div class="alert-box">
   <p>{{ message }}</p>
   <div class="alert-box-actions">
-    <button class="btn-primary" (click)="onClose()">Close</button>
+    <app-button
+      type="button"
+      styleClass="btn btn-primary"
+      (clicked)="onClose()"
+    >
+      Close
+  </app-button>
   </div>
 </div>
 
