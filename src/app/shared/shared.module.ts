@@ -34,6 +34,7 @@ import { ButtonComponent } from './button/button.component';
     FormInputComponent,
     FormTextAreaComponent,
     FormCheckboxesComponent,
+    ButtonComponent,
   ],
   entryComponents: [
     AlertComponent,
