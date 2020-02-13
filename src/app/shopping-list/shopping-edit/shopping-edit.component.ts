@@ -69,6 +69,6 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     this.shoppingForm = new FormGroup({
       'name': new FormControl(null, Validators.required),
       'amount': new FormControl(null, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)])
-    })
+    });
   }
 }

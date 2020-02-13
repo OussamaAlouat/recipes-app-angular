@@ -10,8 +10,8 @@ export class FormCheckboxesComponent implements OnInit {
   @Input() controlledBy: FormGroup;
   @Input() controlName: string;
   @Input() types: string [];
-  constructor() {
-  }
+
+  constructor() {}
 
   ngOnInit() {
     this.addCheckboxes();

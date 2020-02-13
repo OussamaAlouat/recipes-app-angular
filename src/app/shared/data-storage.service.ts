@@ -21,7 +21,6 @@ export class DataStorageService {
     for (let i = 0; i < recipes.length; i++) {
       this.storeOneRecipe(recipes[i]);
     }
-
   }
 
   storeOneRecipe(recipe) {
@@ -42,6 +41,6 @@ export class DataStorageService {
       tap(recipes => {
         this.recipeService.setRecipes(recipes);
       })
-    )
+    );
   }
 }

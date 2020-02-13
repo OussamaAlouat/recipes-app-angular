@@ -14,6 +14,6 @@ export function shoppingListReducer(state = initialState, actcion: Action){
       return {
         ...state,
         ingredients: [...state.ingredients, actcion]
-      }
+      };
   }
 }
