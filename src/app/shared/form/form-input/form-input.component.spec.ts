@@ -14,6 +14,7 @@ const controlName: string = 'name';
       [label]="label"
       [controlledBy]="controlledBy"
       [controlName]="controlName"
+      [type]="type"
     ></app-form-input>
   `,
 })
@@ -23,6 +24,7 @@ class HostComponent {
   label: string;
   controlName: string;
   controlledBy: FormGroup;
+  type: string;
 }
 
 
@@ -80,5 +82,19 @@ describe('FormInputComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     const classes = compiled.querySelector('input').className;
     expect(classes).toContain('ng-invalid');
+  });
+
+  it('The type of the input should be number', () => {
+    hostComponent.type = 'number';
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    const type = compiled.querySelector('input').type;
+    expect(type).toContain('number');
+  });
+
+  it('When type property is undefined, the form-input should have a text type', () => {
+    const compiled = fixture.debugElement.nativeElement;
+    const type = compiled.querySelector('input').type;
+    expect(type).toContain('text');
   });
 });
