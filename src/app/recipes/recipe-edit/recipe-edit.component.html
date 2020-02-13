@@ -64,15 +64,13 @@
 
         <div class="row">
           <div class="col-xs-12">
-            <div class="form-group">
-              <label
-              formArrayName="typeOfRecipe"
-              *ngFor="let type of typeOfRecipeGetter; let i = index"
+            <app-form-checkboxes
+              [types]="types"
+              controlName="typeOfRecipe"
+              [controlledBy]="recipeForm"
             >
-              <input type="checkbox" [formControlName]="i" />
-              {{types[i].name}}
-            </label>
-            </div>
+            </app-form-checkboxes
+            >
           </div>
         </div>
 
