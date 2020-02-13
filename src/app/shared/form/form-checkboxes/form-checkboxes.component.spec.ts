@@ -82,10 +82,10 @@ describe('FormCheckboxesComponent', () => {
     });
 
     it('Any option of checkboxes are selected', () => {
-      expect(component.controlledBy.valid).toBe(false);
-      expect(component.controlledBy.controls.typeOfRecipe.valid).toBe(false);
-      expect(hostComponent.controlledBy.valid).toBe(false);
-      expect(hostComponent.controlledBy.controls.typeOfRecipe.valid).toBe(false);
+      expect(component.controlledBy.valid).toBeFalsy();
+      expect(component.controlledBy.controls.typeOfRecipe.valid).toBeFalsy();
+      expect(hostComponent.controlledBy.valid).toBeFalsy();
+      expect(hostComponent.controlledBy.controls.typeOfRecipe.valid).toBeFalsy();
     });
   });
 });

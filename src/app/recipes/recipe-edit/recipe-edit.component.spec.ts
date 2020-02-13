@@ -74,20 +74,20 @@ describe('RecipeEditComponent', () => {
 
     it('The input name is empty, name should be not valid', () => {
       component.recipeForm.controls.name.setValue(null);
-      expect(component.recipeForm.valid).toBe(false);
-      expect(component.recipeForm.controls.name.valid).toBe(false);
+      expect(component.recipeForm.valid).toBeFalsy()
+      expect(component.recipeForm.controls.name.valid).toBeFalsy();
     });
 
     it('The input imagePath is empty, imagePath should be not valid', () => {
       component.recipeForm.controls.imagePath.setValue(null);
-      expect(component.recipeForm.valid).toBe(false);
-      expect(component.recipeForm.controls.imagePath.valid).toBe(false);
+      expect(component.recipeForm.valid).toBeFalsy();
+      expect(component.recipeForm.controls.imagePath.valid).toBeFalsy();
     });
 
     it('The input description is empty, description should be not valid', () => {
       component.recipeForm.controls.description.setValue(null);
-      expect(component.recipeForm.valid).toBe(false);
-      expect(component.recipeForm.controls.description.valid).toBe(false);
+      expect(component.recipeForm.valid).toBeFalsy();
+      expect(component.recipeForm.controls.description.valid).toBeFalsy();
     });
 
     it('The checkboxed typeOfRecipe is not selected, typeOfRecipe should be not valid', fakeAsync(() => {
@@ -102,8 +102,8 @@ describe('RecipeEditComponent', () => {
 
       tick();
       fixture.detectChanges();
-      expect(component.recipeForm.valid).toBe(false);
-      expect(component.recipeForm.controls.typeOfRecipe.valid).toBe(false);
+      expect(component.recipeForm.valid).toBeFalsy();
+      expect(component.recipeForm.controls.typeOfRecipe.valid).toBeFalsy();
     }));
   });
 
@@ -145,7 +145,7 @@ describe('RecipeEditComponent', () => {
       component.recipeForm.controls.typeOfRecipe.setValue(validTypes);
       fixture.detectChanges();
       const saveButton =fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement;
-      expect(saveButton.disabled).toBe(false);
+      expect(saveButton.disabled).toBeFalsy();
     });
   });
 

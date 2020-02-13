@@ -57,10 +57,10 @@ describe('FormTextAreaComponent', () => {
   });
 
   it('The form textArea should been not valid ', () => {
-    expect(component.controlledBy.valid).toBe(false);
-    expect(component.controlledBy.controls.description.valid).toBe(false);
-    expect(hostComponent.controlledBy.valid).toBe(false);
-    expect(hostComponent.controlledBy.controls.description.valid).toBe(false);
+    expect(component.controlledBy.valid).toBeFalsy();
+    expect(component.controlledBy.controls.description.valid).toBeFalsy();
+    expect(hostComponent.controlledBy.valid).toBeFalsy();
+    expect(hostComponent.controlledBy.controls.description.valid).toBeFalsy();
   });
 
   it('The form input have data, should be valid', () => {
