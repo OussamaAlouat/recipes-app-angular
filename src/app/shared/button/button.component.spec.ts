@@ -8,7 +8,6 @@ import { By } from '@angular/platform-browser';
   selector: 'app-test-button',
   template: `
     <app-button
-      [label]="label"
       [type]="type"
       [disable]="disable"
       [styleClass]="styleClass"
@@ -18,13 +17,11 @@ import { By } from '@angular/platform-browser';
 class HostComponent {
   @ViewChild(ButtonComponent, { static: true })
   child: ButtonComponent;
-  label: string;
   type: string;
   disable: boolean;
   styleClass: string;
 
   constructor() {
-    this.label = 'Save';
     this.type = 'submit';
     this.styleClass ='btn btn-success';
     this.disable = true;
