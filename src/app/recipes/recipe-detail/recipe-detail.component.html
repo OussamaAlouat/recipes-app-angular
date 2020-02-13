@@ -16,13 +16,13 @@
 <div class="row">
   <div class="col-xs-12">
     <div appDropdown class="btn-group">
-      <button
+      <app-button
         type="button"
-        class="btn btn-primary dropdown-toggle"
+        styleClass="btn btn-primary dropdown-toggle"
       >
         Manage recipe
         <span class="caret"></span>
-      </button>
+      </app-button>
       <ul class="dropdown-menu">
         <li><a (click)="onAddToShoppingList()" style="cursor: pointer;">To Shopping list</a></li>
         <li><a  style="cursor: pointer;" (click)="onEditRecipe()">Edit Recipe</a></li>
