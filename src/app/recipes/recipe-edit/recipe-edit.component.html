@@ -10,13 +10,13 @@
           >
             Save
           </app-button>
-          <button
+          <app-button
             type="button"
-            class="btn btn-danger"
-            (click)="onCancel()"
+            styleClass="btn btn-danger"
+            (clicked)="onCancel()"
           >
             Cancel
-          </button>
+        </app-button>
         </div>
 
         <div class="row">
@@ -108,7 +108,7 @@
             <hr>
             <div class="row">
               <div class="col-xs-12">
-                <button class="btn btn-success" (click)="onAddIngredient()">Add ingredient</button>
+                <app-button type="button" styleClass="btn btn-success" (clicked)="onAddIngredient()">Add ingredient</app-button>
               </div>
             </div>
           </div>
