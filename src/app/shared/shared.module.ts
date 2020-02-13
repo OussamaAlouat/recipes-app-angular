@@ -8,6 +8,7 @@ import { FormInputComponent } from './form/form-input/form-input.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormTextAreaComponent } from './form/form-text-area/form-text-area.component';
 import { FormCheckboxesComponent } from './form/form-checkboxes/form-checkboxes.component';
+import { ButtonComponent } from './button/button.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FormCheckboxesComponent } from './form/form-checkboxes/form-checkboxes.
     FormInputComponent,
     FormTextAreaComponent,
     FormCheckboxesComponent,
+    ButtonComponent,
   ],
   imports: [
     CommonModule,
