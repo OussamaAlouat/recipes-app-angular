@@ -1,7 +1,7 @@
 <div [formGroup]="controlledBy" class="form-group">
   <label>{{ label }}  </label>
   <input
-    type="text"
+    [type]="type ? type : 'text'"
     class="form-control"
     [formControlName]="controlName"
   >

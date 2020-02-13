@@ -10,6 +10,7 @@ export class FormInputComponent implements OnInit {
   @Input() label: string;
   @Input() controlledBy: FormGroup;
   @Input() controlName: string;
+  @Input() type: string;
   constructor() {}
 
   ngOnInit() {}
