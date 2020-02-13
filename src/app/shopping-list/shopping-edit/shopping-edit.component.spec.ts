@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { ShoppingEditComponent } from './shopping-edit.component';
 import { ShoppingListService } from '../shopping-list.service';
 import { ButtonComponent } from 'src/app/shared/button/button.component';
+import { FormInputComponent } from 'src/app/shared/form/form-input/form-input.component';
 
 describe('ShoppingEditComponent', () => {
   let component: ShoppingEditComponent;
@@ -12,7 +13,7 @@ describe('ShoppingEditComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShoppingEditComponent, ButtonComponent ],
+      declarations: [ ShoppingEditComponent, ButtonComponent, FormInputComponent ],
       imports: [ HttpClientTestingModule, ReactiveFormsModule ],
       providers: [ShoppingListService]
     })
