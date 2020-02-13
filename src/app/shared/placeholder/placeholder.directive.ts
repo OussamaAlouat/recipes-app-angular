@@ -5,6 +5,5 @@ import { Directive, ViewContainerRef } from '@angular/core';
 })
 export class PlaceholderDirective {
   constructor(public viewContainerRef: ViewContainerRef){
-
   }
 }
