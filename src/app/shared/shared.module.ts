@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormInputComponent } from './form/form-input/form-input.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormTextAreaComponent } from './form/form-text-area/form-text-area.component';
+import { FormCheckboxesComponent } from './form/form-checkboxes/form-checkboxes.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { FormTextAreaComponent } from './form/form-text-area/form-text-area.comp
     DropdownDirective,
     FormInputComponent,
     FormTextAreaComponent,
+    FormCheckboxesComponent,
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { FormTextAreaComponent } from './form/form-text-area/form-text-area.comp
     DropdownDirective,
     CommonModule,
     FormInputComponent,
-    FormTextAreaComponent
+    FormTextAreaComponent,
+    FormCheckboxesComponent,
   ],
   entryComponents: [
     AlertComponent,

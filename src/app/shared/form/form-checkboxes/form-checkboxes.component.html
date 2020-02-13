@@ -1,0 +1,9 @@
+<div class="form-group" [formGroup]="controlledBy" >
+  <label
+    [formArrayName]="controlName"
+    *ngFor="let type of typeOfRecipeGetter; let i = index"
+  >
+    <input type="checkbox" [formControlName]="i" />
+    {{types[i].name}}
+  </label>
+</div>
