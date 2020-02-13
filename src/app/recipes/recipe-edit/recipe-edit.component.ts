@@ -14,8 +14,7 @@ export class RecipeEditComponent implements OnInit {
   id: number;
   editMode: boolean = false;
   recipeForm: FormGroup;
-  types: any[]
-
+  types: {id: number, name: string}[];
 
   constructor(
     private route: ActivatedRoute,
@@ -70,10 +69,8 @@ export class RecipeEditComponent implements OnInit {
       'imagePath': new FormControl(recipeImage, Validators.required),
       'description': new FormControl(recipeDescription, Validators.required),
       'ingredients': recipeIngredients,
-      'typeOfRecipe': new FormArray([], this.minSelectedCheckboxes),
+      'typeOfRecipe': new FormArray([])
     });
-
-    this.addCheckboxes();
   }
 
   onSubmit() {
@@ -118,24 +115,5 @@ export class RecipeEditComponent implements OnInit {
 
   onDeleteIngredient(index: number) {
     (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
-  }
-
-  private addCheckboxes() {
-    this.types.forEach((o, i) => {
-      const control = new FormControl(false); // if first item set to true, else false
-      (<FormArray>this.recipeForm.get('typeOfRecipe')).push(control);
-    });
-  }
-
-  get typeOfRecipeGetter() { // a getter!
-    return (<FormArray>this.recipeForm.get('typeOfRecipe')).controls;
-  }
-
-
-  minSelectedCheckboxes (formArray: FormArray): {required: boolean} | null {
-      const totalSelected = formArray.controls
-        .map(control => control.value)
-        .reduce((prev, next) => next ? prev + next : prev, 0);
-      return totalSelected >= 1 ? null : { required: true };
   }
 }
