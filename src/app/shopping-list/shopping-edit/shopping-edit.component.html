@@ -3,24 +3,23 @@
     <form (ngSubmit)="onSubmit()" [formGroup]="shoppingForm">
       <div class="row">
         <div class="col-sm-5 form-group">
-          <label for="name">Name</label>
-          <input
-            type="text"
+          <app-form-input
             id="name"
-            class="form-control"
-            formControlName="name"
+            label="Name"
+            [controlledBy]="shoppingForm"
+            controlName="name"
           >
+          </app-form-input>
         </div>
         <div class="col-sm-2 form-group">
-          <label for="amount">Amount</label>
-          <input
-            type="number"
+          <app-form-input
             id="amount"
-            class="form-control"
-            name="amount"
-            formControlName="amount"
-            [pattern]="'^[1-9]+[0-9]*$'"
+            type="number"
+            label="Amount"
+            [controlledBy]="shoppingForm"
+            controlName="amount"
           >
+          </app-form-input>
         </div>
       </div>
       <div class="row">
