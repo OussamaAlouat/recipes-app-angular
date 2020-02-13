@@ -7,6 +7,7 @@ import { RecipeService } from '../recipe.service';
 import { ShoppingListService } from '../../shopping-list/shopping-list.service';
 import { of } from 'rxjs';
 import { MockRecipeService } from 'src/__mocks__/RecipeService.component';
+import { ButtonComponent } from 'src/app/shared/button/button.component';
 
 
 describe('RecipeDetailComponent', () => {
@@ -15,7 +16,7 @@ describe('RecipeDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RecipeDetailComponent ],
+      declarations: [ RecipeDetailComponent, ButtonComponent ],
       providers: [
         {
           provide: RecipeService,

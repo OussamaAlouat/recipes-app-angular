@@ -5,6 +5,7 @@ import { RecipeListComponent } from './recipe-list.component';
 import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 import { ShoppingListService } from '../../shopping-list/shopping-list.service';
 import { RecipeService } from '../recipe.service';
+import { ButtonComponent } from 'src/app/shared/button/button.component';
 
 describe('RecipeListComponent', () => {
   let component: RecipeListComponent;
@@ -12,7 +13,7 @@ describe('RecipeListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RecipeListComponent, RecipeItemComponent ],
+      declarations: [ RecipeListComponent, RecipeItemComponent, ButtonComponent ],
       providers: [ RecipeService, ShoppingListService ],
       imports: [ RouterTestingModule ]
    })
