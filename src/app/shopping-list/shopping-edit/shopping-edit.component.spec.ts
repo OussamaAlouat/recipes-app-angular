@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms'
 
 import { ShoppingEditComponent } from './shopping-edit.component';
 import { ShoppingListService } from '../shopping-list.service';
+import { ButtonComponent } from 'src/app/shared/button/button.component';
 
 describe('ShoppingEditComponent', () => {
   let component: ShoppingEditComponent;
@@ -11,7 +12,7 @@ describe('ShoppingEditComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShoppingEditComponent ],
+      declarations: [ ShoppingEditComponent, ButtonComponent ],
       imports: [ HttpClientTestingModule, FormsModule ],
       providers: [ShoppingListService]
     })

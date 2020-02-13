@@ -5,6 +5,7 @@ import { ShoppingListComponent } from './shopping-list.component';
 import { ShoppingListService } from './shopping-list.service';
 import { ShoppingEditComponent } from './shopping-edit/shopping-edit.component';
 import { LoggingService } from '../logging.service';
+import { ButtonComponent } from '../shared/button/button.component';
 
 describe('ShoppingListComponent', () => {
   let component: ShoppingListComponent;
@@ -12,7 +13,7 @@ describe('ShoppingListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShoppingListComponent, ShoppingEditComponent ],
+      declarations: [ ShoppingListComponent, ShoppingEditComponent, ButtonComponent ],
       providers: [ ShoppingListService, LoggingService ],
       imports: [FormsModule]
     })
