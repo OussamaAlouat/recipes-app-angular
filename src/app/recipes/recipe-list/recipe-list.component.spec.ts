@@ -46,7 +46,7 @@ describe('RecipeListComponent', () => {
       expect(nodeListOfAppRecipes.length).toBeGreaterThanOrEqual(1);
     });
 
-    fit('On click on a new Recipe button, onNewRecipe() function should have been called', () => {
+    it('On click on a new Recipe button, onNewRecipe() function should have been called', () => {
       spyOn(component, 'onNewRecipe');
       const button = compiled.querySelector('button');
       button.click();
