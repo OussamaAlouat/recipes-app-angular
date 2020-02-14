@@ -52,7 +52,7 @@ describe('RecipeDetailComponent', () => {
     it('Should appear an img tag', () => {
       const image = compiled.querySelector('img');
       expect(image.alt).toContain('A test recipe');
-      expect(image.src.length).toBeGreaterThan(0);
+      expect(image.src.length).toBeGreaterThan(1);
     });
 
     it('Should appear "A test recipe" as title', () => {
