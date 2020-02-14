@@ -13,7 +13,7 @@ import { ButtonComponent } from 'src/app/shared/button/button.component';
 describe('RecipeDetailComponent', () => {
   let component: RecipeDetailComponent;
   let fixture: ComponentFixture<RecipeDetailComponent>;
-
+  let compiled;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ RecipeDetailComponent, ButtonComponent ],
@@ -42,5 +42,32 @@ describe('RecipeDetailComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('Component should have content', () => {
+    beforeEach(() => {
+      compiled = fixture.debugElement.nativeElement;
+    });
+
+    it('Should appear an img tag', () => {
+      const image = compiled.querySelector('img');
+      expect(image.alt).toContain('A test recipe');
+      expect(image.src.length).toBeGreaterThan(0);
+    });
+
+    it('Should appear "A test recipe" as title', () => {
+      const title = compiled.querySelector('h1').textContent;
+      expect(title).toEqual('A test recipe');
+    });
+
+    it('Should appear an ingredients list with two ingredients', () => {
+      const list = compiled.querySelector('ul.list-group').children.length;
+      expect(list).toEqual(2);
+    });
+
+    it('Should appear "This is a simple test" as description', () => {
+      const description = compiled.querySelector('#description').textContent.trim();
+      expect(description).toEqual('This is a simple test')
+    });
   });
 });
