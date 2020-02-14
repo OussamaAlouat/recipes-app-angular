@@ -69,5 +69,29 @@ describe('RecipeDetailComponent', () => {
       const description = compiled.querySelector('#description').textContent.trim();
       expect(description).toEqual('This is a simple test')
     });
+
+    it('On click on add, onAddToShoppingList should have been called', () => {
+      spyOn(component, 'onAddToShoppingList');
+      const addButton = compiled.querySelector('#add');
+      addButton.click();
+      fixture.detectChanges();
+      expect(component.onAddToShoppingList).toHaveBeenCalled();
+    });
+
+    it('On click on delete, onDeleteRecipe should have been caleld ', () => {
+      spyOn(component, 'onDeleteRecipe');
+      const addButton = compiled.querySelector('#delete');
+      addButton.click();
+      fixture.detectChanges();
+      expect(component.onDeleteRecipe).toHaveBeenCalled();
+    });
+
+    it('On click on edit, onEditRecipe should have been caleld ', () => {
+      spyOn(component, 'onEditRecipe');
+      const addButton = compiled.querySelector('#edit');
+      addButton.click();
+      fixture.detectChanges();
+      expect(component.onEditRecipe).toHaveBeenCalled();
+    });
   });
 });
