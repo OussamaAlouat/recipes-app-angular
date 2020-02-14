@@ -2,13 +2,15 @@ import { Recipe } from 'src/app/recipes/recipe.model';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { Injectable } from '@angular/core';
 import { first } from 'lodash';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class MockRecipeService {
   recipes: Recipe[];
-
+  public recipesChanged: Subject<Recipe []>;
 
   constructor() {
+    this.recipesChanged = new Subject();
     this.recipes = [
       new Recipe('A test recipe',
           'This is a simple test',
