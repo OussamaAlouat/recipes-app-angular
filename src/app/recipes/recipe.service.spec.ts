@@ -1,0 +1,90 @@
+import { TestBed, async } from "@angular/core/testing";
+import { RecipeService } from './recipe.service';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { Recipe } from './recipe.model';
+import { Ingredient } from '../shared/ingredient.model';
+import { clone } from 'lodash';
+
+describe('RecipeService', () => {
+  const recipeItem = new Recipe('A test recipe', 'This is a simple test',
+  'testImane',[new Ingredient('Tomato', 2), new Ingredient('Meat', 1)], 'Other');
+  let service: RecipeService;
+  const arrayOfRecipes: Recipe[] = [recipeItem];
+
+  beforeEach( async() => {
+    TestBed.configureTestingModule({
+      providers: [RecipeService, ShoppingListService]
+    });
+
+    service = TestBed.get(RecipeService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+
+  describe('Get Recipes', () => {
+    it('Should return an empty recipes array', () => {
+      const recipes: Recipe[] = service.getRecipes();
+      expect(recipes).toEqual([]);
+    });
+
+    it('Should return a recipes array with data', () => {
+      service.setRecipes(clone(arrayOfRecipes));
+      const recipes: Recipe[] = service.getRecipes();
+      expect(recipes).toEqual(arrayOfRecipes);
+    });
+  });
+
+  describe('Get recipe', () => {
+    beforeEach(() => {
+      service.setRecipes(clone(arrayOfRecipes));
+    });
+
+    it('With a bad index should return undefined', () => {
+      const response = service.getRecipe(1);
+      expect(response).toBeUndefined();
+    });
+
+    it('Should return a recipe', () => {
+      const response = service.getRecipe(0);
+      expect(response).toEqual(recipeItem);
+    });
+  });
+
+  describe('Add Recipe', () => {
+    let recipesChanged = [];
+    beforeEach(() => {
+      service.recipesChanged.subscribe((response) => {
+        recipesChanged = response;
+      });
+    });
+
+    it('Should add the recipe', () => {
+      service.addRecipe(recipeItem);
+      expect(recipesChanged).toEqual([recipeItem])
+    });
+  });
+
+  describe('Update recipe', () => {
+    let recipesChanged = [];
+    beforeEach(() => {
+      service.setRecipes(clone(arrayOfRecipes));
+      service.recipesChanged.subscribe((response) => {
+        recipesChanged = response;
+      });
+    });
+
+    it('Should update the recipe', () => {
+      const updated = new Recipe('Test', 'description', 'testImane',[], 'Other');
+      service.updateRecipe(0, updated);
+      expect(recipesChanged).toEqual([updated]);
+    });
+
+    it('On bad index, the recipe should not update', () => {
+      const updated = new Recipe('Test', 'description', 'testImane',[], 'Other');
+      service.updateRecipe(1, updated);
+      expect(recipesChanged).toEqual(arrayOfRecipes);
+    });
+  });
+});
