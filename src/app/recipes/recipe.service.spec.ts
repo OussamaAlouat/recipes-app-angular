@@ -10,10 +10,18 @@ describe('RecipeService', () => {
   'testImane',[new Ingredient('Tomato', 2), new Ingredient('Meat', 1)], 'Other');
   let service: RecipeService;
   const arrayOfRecipes: Recipe[] = [recipeItem];
+  const expectedIngredients = [ new Ingredient('Apple', 2), new Ingredient('Orange', 1)]
+  let shoppingListServiceMock;
 
   beforeEach( async() => {
+    shoppingListServiceMock = jasmine.createSpyObj(['addIngredients']);
+    shoppingListServiceMock.addIngredients.and.returnValue(expectedIngredients);
     TestBed.configureTestingModule({
-      providers: [RecipeService, ShoppingListService]
+      providers: [RecipeService,
+        {
+          provide: ShoppingListService, useValue: shoppingListServiceMock
+        }
+      ],
     });
 
     service = TestBed.get(RecipeService);
@@ -85,6 +93,34 @@ describe('RecipeService', () => {
       const updated = new Recipe('Test', 'description', 'testImane',[], 'Other');
       service.updateRecipe(1, updated);
       expect(recipesChanged).toEqual(arrayOfRecipes);
+    });
+  });
+
+  describe('Delete a recipe', () => {
+    let recipesChanged = [];
+    beforeEach(() => {
+      service.setRecipes(clone(arrayOfRecipes));
+      service.recipesChanged.subscribe((response) => {
+        recipesChanged = response;
+      });
+    });
+
+    it('A recipe should be deleted', () => {
+      service.deleteRecipe(0);
+      expect(recipesChanged).toEqual([]);
+    });
+
+    it('On not valid index, recipes should not changed', () => {
+      service.deleteRecipe(1);
+      expect(recipesChanged).toEqual(arrayOfRecipes);
+    })
+  });
+
+
+  describe('Add ingredients', () => {
+    it('On addIngredientsToShoppingList, addIngredients should have been calles', () => {
+      service.addIngredientsToShoppingList(expectedIngredients);
+      expect(shoppingListServiceMock.addIngredients).toHaveBeenCalled();
     });
   });
 });
