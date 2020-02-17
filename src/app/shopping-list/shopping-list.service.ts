@@ -1,6 +1,6 @@
 import { Ingredient } from '../shared/ingredient.model';
 import { Subject } from 'rxjs';
-import { find } from 'lodash';
+import { find, isNil } from 'lodash';
 
 export class ShoppingListService {
   ingredientsChanged= new Subject<Ingredient[]>();
@@ -25,7 +25,7 @@ export class ShoppingListService {
   }
 
   addIngredient(ingredient: Ingredient) {
-    if (!find(this.ingredients, ingredient)) {
+    if (this.isIngredientValid(ingredient)) {
       this.ingredients.push(ingredient);
       this.ingredientsChanged.next(this.ingredients.slice());
     }
@@ -49,5 +49,17 @@ export class ShoppingListService {
   removeIngreditent(index: number) {
     this.ingredients.splice(index, 1);
     this.ingredientsChanged.next(this.ingredients.slice());
+  }
+
+  private isIngredientValid(ingredient: Ingredient) {
+    if (isNil(ingredient)
+      || isNil(ingredient.amount)
+      || isNil(ingredient.name)
+      || find(this.ingredients, ingredient)
+    ) {
+      return false;
+    }
+
+    return true
   }
 }
