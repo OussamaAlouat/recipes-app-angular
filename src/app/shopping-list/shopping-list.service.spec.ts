@@ -91,4 +91,23 @@ describe('ShoppingListService', () => {
       expect(find(ingredientsChanged, expectEdIngredient)).toBeUndefined();
     });
   });
+
+  describe('Remove ingredients', () => {
+    beforeEach(() => {
+      service = TestBed.get(ShoppingListService);
+      service.ingredientsChanged.subscribe((response) => {
+        ingredientsChanged = response;
+      });
+    });
+
+    it('Should remove one ingredient', () => {
+      service.removeIngreditent(0);
+      expect(ingredientsChanged.length).toBe(1);
+    });
+
+    it('Should not remove one ingredient when the index is not good', () => {
+      service.removeIngreditent(45);
+      expect(ingredientsChanged.length).toBe(2);
+    });
+  });
 });
