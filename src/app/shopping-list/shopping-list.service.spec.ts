@@ -60,6 +60,13 @@ describe('ShoppingListService', () => {
       expect(ingredientsChanged.length).toBe(3);
       expect(find(ingredientsChanged, expectEdIngredient)).toEqual(expectEdIngredient)
     });
+
+    it('If ingredient exists, it shouldnt have been added', () => {
+      spyOn(service.ingredientsChanged,'next')
+      const expectEdIngredient = new Ingredient('Apples', 5);
+      service.addIngredient(expectEdIngredient);
+      expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
+    });
   });
 
   describe('Update ingredient', () => {
