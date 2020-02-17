@@ -29,7 +29,7 @@ export class ShoppingListService {
   }
 
   updateIngredient(index: number, newIngredient: Ingredient) {
-    if (this.addIngredient[index]) {
+    if (this.ingredients[index]) {
       this.ingredients[index] = newIngredient;
     }
 
