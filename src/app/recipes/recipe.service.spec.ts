@@ -72,6 +72,20 @@ describe('RecipeService', () => {
       service.addRecipe(recipeItem);
       expect(recipesChanged).toEqual([recipeItem])
     });
+
+    describe('Parameter should nill, and should not add any reipe', () => {
+      it('Parameter should be null', () => {
+        spyOn(service.recipesChanged, 'next');
+        service.addRecipe(null);
+        expect(service.recipesChanged.next).not.toHaveBeenCalled();
+      });
+
+      it('Parameter should be undefined', () => {
+        spyOn(service.recipesChanged, 'next');
+        service.addRecipe(undefined);
+        expect(service.recipesChanged.next).not.toHaveBeenCalled();
+      });
+    });
   });
 
   describe('Update recipe', () => {
