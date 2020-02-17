@@ -1,19 +1,6 @@
 <ng-template appPlaceholder></ng-template>
 <div class="row">
   <div class="col-xs-12 col-md-6 col-md-offset-3">
-    <!--
-    <div class="alert alert-danger" *ngIf="error">
-      <p>{{error}}</p>
-    </div>
-    -->
-    <!--
-    <app-alert
-      [message]="error"
-      *ngIf="error"
-      (close)="onHandleError()"
-    >
-    </app-alert>
-  -->
     <div *ngIf="isLoading" style="text-align: center;">
       <app-loading-spinner></app-loading-spinner>
     </div>
@@ -45,20 +32,21 @@
       </div>
 
       <div>
-        <button
-          class="btn btn-primary"
+        <app-button
           type="submit"
-          [disabled]="!authForm.valid"
+          styleClass="btn btn-primary"
+          [disable]="!authForm.valid"
         >
           {{ isLoginMode ? 'Login' : 'Sign Up' }}
-        </button> |
-        <button
-          class="btn btn-primary"
-          (click)="onSwitchMode()"
+        </app-button>
+        <app-button
           type="button"
+          styleClass="btn btn-primary"
+          [disable]="!authForm.valid"
+          (clicked)="onSwitchMode()"
         >
           Switch to {{ isLoginMode ? 'Sign Up' : 'Login' }}
-        </button>
+        </app-button>
       </div>
     </form>
   </div>

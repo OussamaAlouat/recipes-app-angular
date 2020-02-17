@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
-import { NgForm } from '@angular/forms';
+import {  FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./shopping-edit.component.scss']
 })
 export class ShoppingEditComponent implements OnInit, OnDestroy {
-  @ViewChild('f', {static: false }) slForm: NgForm;
+  shoppingForm: FormGroup;
   private subscription: Subscription;
   editMode: boolean = false;
   editedItemIndex: number;
@@ -19,21 +19,21 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   constructor(private shoppingListService : ShoppingListService) {}
 
   ngOnInit() {
+    this.createForm();
     this.subscription = this.shoppingListService.startedEditing.subscribe(
       (index: number) => {
         this.editMode = true;
         this.editedItemIndex = index;
         this.editedItem = this.shoppingListService.getIngredient(index);
-        this.slForm.setValue({
-          name: this.editedItem.name,
-          amount: this.editedItem.amount
-        });
+
+        this.shoppingForm.controls.name.setValue(this.editedItem.name);
+        this.shoppingForm.controls.amount.setValue(this.editedItem.amount);
       }
     );
   }
 
-  onSubmit(form: NgForm) {
-    const value = form.value;
+  onSubmit() {
+    const value = this.shoppingForm.value;
     const newIngredient = new Ingredient(value.name, value.amount);
 
     if (this.editMode) {
@@ -43,26 +43,32 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     }
 
     this.editMode = false;
-    form.reset();
+    this.shoppingForm.reset();
   }
 
-  onClearForm(form: NgForm) {
-    form.reset();
-    /*
-      Other form to macke that:
-      this.slForm.reset();
-    */
+  onClearForm() {
+    this.shoppingForm.reset();
     this.editMode = false;
   }
 
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   onRemove(){
     this.shoppingListService.removeIngreditent(this.editedItemIndex);
     this.editMode = false;
-    this.slForm.reset();
+    this.shoppingForm.reset();
+  }
+
+
+  private createForm() {
+    this.shoppingForm = new FormGroup({
+      'name': new FormControl(null, Validators.required),
+      'amount': new FormControl(null, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)])
+    });
   }
 }

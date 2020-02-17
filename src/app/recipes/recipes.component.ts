@@ -13,6 +13,5 @@ export class RecipesComponent implements OnInit {
 
   ngOnInit() {
     this.loggingService.printLog('Hello from Recipes ngOnInit');
-
   }
 }

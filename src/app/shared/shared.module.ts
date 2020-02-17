@@ -4,6 +4,11 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 import { PlaceholderDirective } from './placeholder/placeholder.directive';
 import { DropdownDirective } from './dropdown.directive';
 import { CommonModule } from '@angular/common';
+import { FormInputComponent } from './form/form-input/form-input.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormTextAreaComponent } from './form/form-text-area/form-text-area.component';
+import { FormCheckboxesComponent } from './form/form-checkboxes/form-checkboxes.component';
+import { ButtonComponent } from './button/button.component';
 
 @NgModule({
   declarations: [
@@ -11,9 +16,14 @@ import { CommonModule } from '@angular/common';
     LoadingSpinnerComponent,
     PlaceholderDirective,
     DropdownDirective,
+    FormInputComponent,
+    FormTextAreaComponent,
+    FormCheckboxesComponent,
+    ButtonComponent,
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule
   ],
   exports: [
     AlertComponent,
@@ -21,6 +31,10 @@ import { CommonModule } from '@angular/common';
     PlaceholderDirective,
     DropdownDirective,
     CommonModule,
+    FormInputComponent,
+    FormTextAreaComponent,
+    FormCheckboxesComponent,
+    ButtonComponent,
   ],
   entryComponents: [
     AlertComponent,

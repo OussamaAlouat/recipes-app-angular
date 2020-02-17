@@ -1,36 +1,51 @@
 <div class="row">
   <div class="col-xs-12">
-    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <form (ngSubmit)="onSubmit()" [formGroup]="shoppingForm">
       <div class="row">
         <div class="col-sm-5 form-group">
-          <label for="name">Name</label>
-          <input
-            type="text"
+          <app-form-input
             id="name"
-            class="form-control"
-            name="name"
-            ngModel
-            required
+            label="Name"
+            [controlledBy]="shoppingForm"
+            controlName="name"
           >
+          </app-form-input>
         </div>
         <div class="col-sm-2 form-group">
-          <label for="amount">Amount</label>
-          <input
-            type="number"
+          <app-form-input
             id="amount"
-            class="form-control"
-            name="amount"
-            ngModel
-            required
-            [pattern]="'^[1-9]+[0-9]*$'"
+            type="number"
+            label="Amount"
+            [controlledBy]="shoppingForm"
+            controlName="amount"
           >
+          </app-form-input>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <button class="btn btn-success" type="submit" [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add' }}</button>
-          <button class="btn btn-danger" type="button" [disabled]="!editMode" (click)="onRemove()">Delete</button>
-          <button class="btn btn-prymary" type="button" (click)="onClearForm(f)">Clear</button>
+          <app-button
+            type="submit"
+            styleClass="btn btn-success"
+            [disable]="!shoppingForm.valid"
+          >
+            {{ editMode ? 'Update' : 'Add' }}
+          </app-button>
+          <app-button
+            type="button"
+            styleClass="btn btn-danger"
+            (clicked)="onRemove()"
+            [disable]="!editMode"
+          >
+            Delete
+          </app-button>
+          <app-button
+            type="button"
+            styleClass="btn btn-prymary"
+            (clicked)="onClearForm()"
+          >
+            Clear
+          </app-button>
         </div>
       </div>
     </form>

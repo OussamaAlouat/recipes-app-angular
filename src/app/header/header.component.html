@@ -9,7 +9,6 @@
           <a
             [routerLink]="['recipes']"
             [routerLinkActive]="['active']"
-            *ngIf="isAutenticated"
           >
             Recipes
           </a>
@@ -27,14 +26,13 @@
           <a
             [routerLink]="['shopping-list']"
             [routerLinkActive]="['active']"
-            *ngIf="isAutenticated"
           >
             Shopping List
           </a>
         </li>
 
       </ul>
-      <ul class="nav navbar-nav navbar-right" *ngIf="isAutenticated">
+      <ul class="nav navbar-nav navbar-right">
         <li>
           <a style="cursor: pointer;" (click)="onLogout()">Logout</a>
         </li>
