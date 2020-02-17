@@ -18,4 +18,5 @@ import { SharedModue } from '../shared/shared.module';
     ReactiveFormsModule,
   ]
 })
+
 export class ShoppingListModule {}

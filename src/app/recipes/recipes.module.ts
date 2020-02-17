@@ -11,7 +11,6 @@ import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { RecipesRoutingModule } from './recipes-routing.module';
 import { SharedModue } from '../shared/shared.module';
 
-
 @NgModule({
   declarations: [
     RecipesComponent,

@@ -40,4 +40,5 @@ import { ButtonComponent } from './button/button.component';
     AlertComponent,
   ]
 })
+
 export class SharedModue{}

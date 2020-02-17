@@ -33,7 +33,6 @@ class HostComponent {
   }
 }
 
-
 describe('RecipeItemComponent', () => {
   let hostComponent: HostComponent;
   let component: RecipeItemComponent;
@@ -59,7 +58,6 @@ describe('RecipeItemComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
 
   describe('Component should have content', () => {
     beforeEach(() => {

@@ -7,6 +7,7 @@ import { LoggingService } from '../logging.service';
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.scss']
 })
+
 export class RecipesComponent implements OnInit {
   public recivedRecipe: Recipe;
   constructor(private loggingService: LoggingService) {}
