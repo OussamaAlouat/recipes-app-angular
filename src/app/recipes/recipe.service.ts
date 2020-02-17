@@ -27,8 +27,10 @@ export class RecipeService {
   }
 
   addRecipe(recipe: Recipe) {
-    this.recipes.push(recipe);
-    this.recipesChanged.next(this.recipes.slice());
+    if (recipe) {
+      this.recipes.push(recipe);
+      this.recipesChanged.next(this.recipes.slice());
+    }
   }
 
   updateRecipe(index: number, recipe: Recipe) {
