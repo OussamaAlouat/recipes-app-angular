@@ -40,8 +40,10 @@ export class ShoppingListService {
   }
 
   addIngredients(ingredients: Ingredient []) {
-    this.ingredients.push(...ingredients);
-    this.ingredientsChanged.next(this.ingredients.slice());
+    if (ingredients && ingredients.length) {
+      this.ingredients.push(...ingredients);
+      this.ingredientsChanged.next(this.ingredients.slice());
+    }
   }
 
   removeIngreditent(index: number) {
