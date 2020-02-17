@@ -133,4 +133,46 @@ describe('ShoppingListService', () => {
       expect(ingredientsChanged.length).toBe(2);
     });
   });
+
+  describe('Add ingredients', () => {
+    beforeEach(() => {
+      service = TestBed.get(ShoppingListService);
+      service.ingredientsChanged.subscribe((response) => {
+        ingredientsChanged = response;
+      });
+    });
+
+    it('Should add the ingredients', () => {
+      const newIngredients = [
+        new Ingredient('Orange', 5),
+        new Ingredient('Banana', 10)
+      ];
+
+      service.addIngredients(newIngredients);
+      expect(ingredientsChanged.length).toBe(4);
+    });
+
+    describe('The parameter should be nill or empty', () => {
+      it('When the parameter is an empty array, should not add anithing', () => {
+        spyOn(service.ingredientsChanged, 'next');
+        const newIngredients = [];
+        service.addIngredients(newIngredients);
+        expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
+      });
+
+      it('The parameter should be null', () => {
+        spyOn(service.ingredientsChanged, 'next');
+        const newIngredients = null;
+        service.addIngredients(newIngredients);
+        expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
+      });
+
+      it('The parameter should be undefined', () => {
+        spyOn(service.ingredientsChanged, 'next');
+        const newIngredients = undefined;
+        service.addIngredients(newIngredients);
+        expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
+      });
+    });
+  });
 });
