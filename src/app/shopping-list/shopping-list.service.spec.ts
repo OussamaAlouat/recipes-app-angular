@@ -85,7 +85,7 @@ describe('ShoppingListService', () => {
 
       it('Parameter should be an empty object', () => {
         spyOn(service.ingredientsChanged,'next')
-        const expectEdIngredient = {};
+        const expectEdIngredient = { name: null, amount: null };
         service.addIngredient(expectEdIngredient);
         expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
       });
