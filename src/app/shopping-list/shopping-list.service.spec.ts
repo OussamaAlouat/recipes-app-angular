@@ -67,6 +67,29 @@ describe('ShoppingListService', () => {
       service.addIngredient(expectEdIngredient);
       expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
     });
+
+    describe('Parameter should be nill or empty and the array should not been modified', () => {
+      it('Parameter should be null', () => {
+        spyOn(service.ingredientsChanged,'next')
+        const expectEdIngredient = null;
+        service.addIngredient(expectEdIngredient);
+        expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
+      });
+
+      it('Parameter should be undefined', () => {
+        spyOn(service.ingredientsChanged,'next')
+        const expectEdIngredient = undefined;
+        service.addIngredient(expectEdIngredient);
+        expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
+      });
+
+      it('Parameter should be an empty object', () => {
+        spyOn(service.ingredientsChanged,'next')
+        const expectEdIngredient = {};
+        service.addIngredient(expectEdIngredient);
+        expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
+      });
+    });
   });
 
   describe('Update ingredient', () => {
