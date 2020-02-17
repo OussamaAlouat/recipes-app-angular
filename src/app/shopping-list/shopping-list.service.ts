@@ -1,5 +1,6 @@
 import { Ingredient } from '../shared/ingredient.model';
 import { Subject } from 'rxjs';
+import { find } from 'lodash';
 
 export class ShoppingListService {
   ingredientsChanged= new Subject<Ingredient[]>();
@@ -24,8 +25,10 @@ export class ShoppingListService {
   }
 
   addIngredient(ingredient: Ingredient) {
-    this.ingredients.push(ingredient);
-    this.ingredientsChanged.next(this.ingredients.slice());
+    if (!find(this.ingredients, ingredient)) {
+      this.ingredients.push(ingredient);
+      this.ingredientsChanged.next(this.ingredients.slice());
+    }
   }
 
   updateIngredient(index: number, newIngredient: Ingredient) {
