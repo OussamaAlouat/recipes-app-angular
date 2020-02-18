@@ -32,11 +32,10 @@ export class ShoppingListService {
   }
 
   updateIngredient(index: number, newIngredient: Ingredient) {
-    if (this.ingredients[index]) {
+    if (this.ingredients[index] && this.isIngredientValid(newIngredient)) {
       this.ingredients[index] = newIngredient;
+      this.ingredientsChanged.next(this.ingredients.slice());
     }
-
-    this.ingredientsChanged.next(this.ingredients.slice());
   }
 
   addIngredients(ingredients: Ingredient []) {
