@@ -23,4 +23,3 @@ describe('LoadingSpinnerComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

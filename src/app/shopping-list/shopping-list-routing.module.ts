@@ -4,7 +4,7 @@ import { ShoppingListComponent } from './shopping-list.component';
 
 const routes: Routes = [
   { path: '', component: ShoppingListComponent },
-]
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

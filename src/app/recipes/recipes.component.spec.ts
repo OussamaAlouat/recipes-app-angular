@@ -33,4 +33,3 @@ describe('RecipesComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

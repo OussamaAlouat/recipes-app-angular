@@ -27,4 +27,5 @@ import { SharedModue } from '../shared/shared.module';
     RecipesRoutingModule
   ],
 })
+
 export class RecipesModule {}

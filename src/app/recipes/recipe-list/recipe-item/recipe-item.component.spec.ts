@@ -7,7 +7,6 @@ import { Recipe } from '../../recipe.model';
 
 // Init the recipe
 const name = 'Name';
-
 const image = 'https://keyassets-p2.timeincuk.net/wp/prod/wp-content/uploads/sites/53/2019/02/Cheesy-mince-pasta-bake.jpg';
 const recipe = new Recipe(name, 'description', image, [], 'Other');
 

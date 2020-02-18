@@ -36,4 +36,3 @@ describe('ShoppingListComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

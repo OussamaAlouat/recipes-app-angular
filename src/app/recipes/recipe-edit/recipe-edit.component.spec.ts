@@ -139,7 +139,6 @@ describe('RecipeEditComponent', () => {
   });
 
   describe('Form should be valid when', () => {
-
     it('All form elements are not empty', () => {
       component.recipeForm.controls.name.setValue('Tests');
       component.recipeForm.controls.description.setValue('Description test');
