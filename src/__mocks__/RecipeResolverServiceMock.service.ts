@@ -9,11 +9,6 @@ export class RecipesResolverServiceMock  implements Resolve<Recipe[]>{
   constructor(private dataStorageService: DataStorageService,
     private recipesService: MockRecipeService){}
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
-    const recipes = this.recipesService.getRecipes();
-    if (recipes.length === 0 ){
-      return this.dataStorageService.fetchRecipes();
-    }
-
-    return recipes;
+    return [];
   }
 }
