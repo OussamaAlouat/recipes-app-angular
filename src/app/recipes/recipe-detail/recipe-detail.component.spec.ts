@@ -2,12 +2,12 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router, Route } from '@angular/router';
 
 import { RecipeDetailComponent } from './recipe-detail.component';
+import { ButtonComponent } from 'src/app/shared/button/button.component';
 
 import { RecipeService } from '../recipe.service';
 import { ShoppingListService } from '../../shopping-list/shopping-list.service';
 import { of } from 'rxjs';
 import { MockRecipeService } from 'src/__mocks__/RecipeService.component';
-import { ButtonComponent } from 'src/app/shared/button/button.component';
 
 describe('RecipeDetailComponent', () => {
   let component: RecipeDetailComponent;

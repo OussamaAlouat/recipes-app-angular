@@ -1,6 +1,5 @@
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { Subject } from 'rxjs';
-import { find, isNil } from 'lodash';
 
 export class ShoppingListServiceMock {
   ingredientsChanged= new Subject<Ingredient[]>();
@@ -16,7 +15,6 @@ export class ShoppingListServiceMock {
     this.startedEditing = new Subject();
   }
 
-
   getIngredient(index: number) {
     return this.ingredients[index];
   }
@@ -24,7 +22,7 @@ export class ShoppingListServiceMock {
   addIngredient(ingredient: Ingredient) {
     this.ingredients.push(ingredient);
     this.ingredientsChanged.next(this.ingredients.slice());
-    }
+  }
 
   updateIngredient(index: number, newIngredient: Ingredient) {
     this.ingredients[index] = newIngredient;
