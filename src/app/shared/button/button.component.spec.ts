@@ -14,6 +14,7 @@ import { By } from '@angular/platform-browser';
     ></app-button>
   `,
 })
+
 class HostComponent {
   @ViewChild(ButtonComponent, { static: true })
   child: ButtonComponent;
@@ -27,7 +28,6 @@ class HostComponent {
     this.disable = true;
   }
 }
-
 
 describe('ButtonComponent', () => {
   let hostcomponent: HostComponent;

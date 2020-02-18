@@ -27,13 +27,10 @@ class HostComponent {
   type: string;
 }
 
-
-
 describe('FormInputComponent', () => {
   let component: FormInputComponent;
   let fixture: ComponentFixture<HostComponent>;
   let hostComponent: HostComponent;
-
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

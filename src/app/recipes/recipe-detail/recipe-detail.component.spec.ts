@@ -9,7 +9,6 @@ import { of } from 'rxjs';
 import { MockRecipeService } from 'src/__mocks__/RecipeService.component';
 import { ButtonComponent } from 'src/app/shared/button/button.component';
 
-
 describe('RecipeDetailComponent', () => {
   let component: RecipeDetailComponent;
   let fixture: ComponentFixture<RecipeDetailComponent>;

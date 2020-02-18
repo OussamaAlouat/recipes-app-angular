@@ -14,4 +14,5 @@ import { SharedModue } from '../shared/shared.module';
     ]),
   ]
 })
+
 export class AuthModule {}

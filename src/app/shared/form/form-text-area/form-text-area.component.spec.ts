@@ -17,6 +17,7 @@ const controlName: string = 'description';
     ></app-form-text-area>
   `,
 })
+
 class HostComponent {
   @ViewChild(FormTextAreaComponent, { static: true })
   child: FormTextAreaComponent;
@@ -24,7 +25,6 @@ class HostComponent {
   controlName: string;
   controlledBy: FormGroup;
 }
-
 
 describe('FormTextAreaComponent', () => {
   let component: FormTextAreaComponent;

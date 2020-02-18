@@ -1,5 +1,6 @@
 import { Ingredient } from '../shared/ingredient.model';
 import { Subject } from 'rxjs';
+import { find, isNil } from 'lodash';
 
 export class ShoppingListService {
   ingredientsChanged= new Subject<Ingredient[]>();
@@ -24,22 +25,40 @@ export class ShoppingListService {
   }
 
   addIngredient(ingredient: Ingredient) {
-    this.ingredients.push(ingredient);
-    this.ingredientsChanged.next(this.ingredients.slice());
+    if (this.isIngredientValid(ingredient)) {
+      this.ingredients.push(ingredient);
+      this.ingredientsChanged.next(this.ingredients.slice());
+    }
   }
 
   updateIngredient(index: number, newIngredient: Ingredient) {
-    this.ingredients[index] = newIngredient;
-    this.ingredientsChanged.next(this.ingredients.slice());
+    if (this.ingredients[index] && this.isIngredientValid(newIngredient)) {
+      this.ingredients[index] = newIngredient;
+      this.ingredientsChanged.next(this.ingredients.slice());
+    }
   }
 
   addIngredients(ingredients: Ingredient []) {
-    this.ingredients.push(...ingredients);
-    this.ingredientsChanged.next(this.ingredients.slice());
+    if (ingredients && ingredients.length) {
+      this.ingredients.push(...ingredients);
+      this.ingredientsChanged.next(this.ingredients.slice());
+    }
   }
 
   removeIngreditent(index: number) {
     this.ingredients.splice(index, 1);
     this.ingredientsChanged.next(this.ingredients.slice());
+  }
+
+  private isIngredientValid(ingredient: Ingredient) {
+    if (isNil(ingredient)
+      || isNil(ingredient.amount)
+      || isNil(ingredient.name)
+      || find(this.ingredients, ingredient)
+    ) {
+      return false;
+    }
+
+    return true
   }
 }

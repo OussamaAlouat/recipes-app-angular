@@ -1,4 +1,4 @@
-import { TestBed, async } from "@angular/core/testing";
+import { TestBed } from "@angular/core/testing";
 import { RecipeService } from './recipe.service';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Recipe } from './recipe.model';
@@ -72,6 +72,34 @@ describe('RecipeService', () => {
       service.addRecipe(recipeItem);
       expect(recipesChanged).toEqual([recipeItem])
     });
+
+    describe('Parameter should nill or empty, and should not add any reipe', () => {
+      it('Parameter should be null', () => {
+        spyOn(service.recipesChanged, 'next');
+        service.addRecipe(null);
+        expect(service.recipesChanged.next).not.toHaveBeenCalled();
+      });
+
+      it('Parameter should be undefined', () => {
+        spyOn(service.recipesChanged, 'next');
+        service.addRecipe(undefined);
+        expect(service.recipesChanged.next).not.toHaveBeenCalled();
+      });
+
+      it('Parameter should be empty', () => {
+        const recipeToUpdate = {
+          name: null,
+          description: null,
+          imagePath: null,
+          typeOfRecipe: null,
+          ingredients: null
+        };
+
+        spyOn(service.recipesChanged, 'next');
+        service.addRecipe(recipeToUpdate);
+        expect(service.recipesChanged.next).not.toHaveBeenCalled();
+      });
+    });
   });
 
   describe('Update recipe', () => {
@@ -90,9 +118,38 @@ describe('RecipeService', () => {
     });
 
     it('On bad index, the recipe should not update', () => {
+      spyOn(service.recipesChanged, 'next');
       const updated = new Recipe('Test', 'description', 'testImane',[], 'Other');
       service.updateRecipe(1, updated);
-      expect(recipesChanged).toEqual(arrayOfRecipes);
+      expect(service.recipesChanged.next).not.toHaveBeenCalled();
+    });
+
+    describe('Recipe should be nill or empty, and recipe should not updated', () => {
+      it('Parameter should be null', () => {
+        spyOn(service.recipesChanged, 'next');
+        service.updateRecipe(0, null);
+        expect(service.recipesChanged.next).not.toHaveBeenCalled();
+      });
+
+      it('Parameter should be undefined', () => {
+        spyOn(service.recipesChanged, 'next');
+        service.updateRecipe(0, undefined);
+        expect(service.recipesChanged.next).not.toHaveBeenCalled();
+      });
+
+      it('Parameter should be empty', () => {
+        const recipeToUpdate = {
+          name: null,
+          description: null,
+          imagePath: null,
+          typeOfRecipe: null,
+          ingredients: null
+        };
+
+        spyOn(service.recipesChanged, 'next');
+        service.updateRecipe(0, recipeToUpdate);
+        expect(service.recipesChanged.next).not.toHaveBeenCalled();
+      });
     });
   });
 
@@ -115,7 +172,6 @@ describe('RecipeService', () => {
       expect(recipesChanged).toEqual(arrayOfRecipes);
     })
   });
-
 
   describe('Add ingredients', () => {
     it('On addIngredientsToShoppingList, addIngredients should have been calles', () => {

@@ -9,4 +9,5 @@ import { RecipeService } from './recipes/recipe.service';
     RecipeService,
   ],
 })
+
 export class CoreModule {}
