@@ -32,7 +32,7 @@ describe('RecipeEditComponent', () => {
 
   let mockRouter:any;
   class MockRouter {
-      navigate = jasmine.createSpy('navigate');
+    navigate = jasmine.createSpy('navigate');
   }
 
   beforeEach(async(() => {
