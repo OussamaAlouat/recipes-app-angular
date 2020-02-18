@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LoggingService } from './logging.service';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +9,7 @@ import { LoggingService } from './logging.service';
 export class AppComponent implements OnInit{
   title = 'angularBasics';
   constructor(
-    private loggingService: LoggingService,
   ) {}
 
-  ngOnInit() {
-    this.loggingService.printLog('Hello from AppComponent ngOnInit');
-  }
+  ngOnInit() {}
 }

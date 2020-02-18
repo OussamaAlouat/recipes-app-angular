@@ -12,7 +12,6 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipeItemComponent } from './recipe-list/recipe-item/recipe-item.component';
 
-import { LoggingService } from '../logging.service';
 import { RecipeService } from './recipe.service';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { MockRecipeService } from 'src/__mocks__/RecipeService.component';
@@ -62,7 +61,6 @@ describe('Recipes routing', () => {
         ButtonComponent
       ],
       providers: [
-        LoggingService,
         RecipeService,
         ShoppingListService,
         RecipesResolverServiceMock,

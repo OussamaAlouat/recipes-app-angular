@@ -5,7 +5,6 @@ import { RecipesComponent } from './recipes.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipeItemComponent } from './recipe-list/recipe-item/recipe-item.component';
 
-import { LoggingService } from '../logging.service';
 import { RecipeService } from './recipe.service';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { ButtonComponent } from '../shared/button/button.component';
@@ -18,7 +17,7 @@ describe('RecipesComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ RecipesComponent, RecipeListComponent, RecipeItemComponent, ButtonComponent ],
       imports: [ RouterTestingModule ],
-      providers: [ LoggingService, RecipeService, ShoppingListService ]
+      providers: [ RecipeService, ShoppingListService ]
     })
     .compileComponents();
   }));
