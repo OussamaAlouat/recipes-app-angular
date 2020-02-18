@@ -73,7 +73,7 @@ describe('RecipeService', () => {
       expect(recipesChanged).toEqual([recipeItem])
     });
 
-    describe('Parameter should nill, and should not add any reipe', () => {
+    describe('Parameter should nill or empty, and should not add any reipe', () => {
       it('Parameter should be null', () => {
         spyOn(service.recipesChanged, 'next');
         service.addRecipe(null);
@@ -83,6 +83,20 @@ describe('RecipeService', () => {
       it('Parameter should be undefined', () => {
         spyOn(service.recipesChanged, 'next');
         service.addRecipe(undefined);
+        expect(service.recipesChanged.next).not.toHaveBeenCalled();
+      });
+
+      it('Parameter should be empty', () => {
+        const recipeToUpdate = {
+          name: null,
+          description: null,
+          imagePath: null,
+          typeOfRecipe: null,
+          ingredients: null
+        };
+
+        spyOn(service.recipesChanged, 'next');
+        service.addRecipe(recipeToUpdate);
         expect(service.recipesChanged.next).not.toHaveBeenCalled();
       });
     });
@@ -110,7 +124,7 @@ describe('RecipeService', () => {
       expect(service.recipesChanged.next).not.toHaveBeenCalled();
     });
 
-    describe('Recipe should be nill, and recipe should not updated', () => {
+    describe('Recipe should be nill or empty, and recipe should not updated', () => {
       it('Parameter should be null', () => {
         spyOn(service.recipesChanged, 'next');
         service.updateRecipe(0, null);
@@ -120,6 +134,20 @@ describe('RecipeService', () => {
       it('Parameter should be undefined', () => {
         spyOn(service.recipesChanged, 'next');
         service.updateRecipe(0, undefined);
+        expect(service.recipesChanged.next).not.toHaveBeenCalled();
+      });
+
+      it('Parameter should be empty', () => {
+        const recipeToUpdate = {
+          name: null,
+          description: null,
+          imagePath: null,
+          typeOfRecipe: null,
+          ingredients: null
+        };
+
+        spyOn(service.recipesChanged, 'next');
+        service.updateRecipe(0, recipeToUpdate);
         expect(service.recipesChanged.next).not.toHaveBeenCalled();
       });
     });
