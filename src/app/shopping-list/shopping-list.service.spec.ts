@@ -108,10 +108,33 @@ describe('ShoppingListService', () => {
     });
 
     it('On try to update not existing index, should return the ingredients array without changes', () => {
+      spyOn(service.ingredientsChanged,'next')
       const expectEdIngredient = new Ingredient('Orange', 2);
       service.updateIngredient(3, expectEdIngredient);
-      expect(ingredientsChanged.length).toBe(2);
-      expect(find(ingredientsChanged, expectEdIngredient)).toBeUndefined();
+      expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
+    });
+
+    describe('Ingredient should be nill or empty, and ingreident should not be modified', () => {
+      it('Ingredient should be null', () => {
+        spyOn(service.ingredientsChanged,'next')
+        const expectEdIngredient = null;
+        service.updateIngredient(0, expectEdIngredient);
+        expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
+      });
+
+      it('Ingredient should be undefined', () => {
+        spyOn(service.ingredientsChanged,'next')
+        const expectEdIngredient = undefined;
+        service.updateIngredient(0, expectEdIngredient);
+        expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
+      });
+
+      it('Ingredient should be empty', () => {
+        spyOn(service.ingredientsChanged,'next')
+        const expectEdIngredient = { name: null, amount: null };
+        service.updateIngredient(0, expectEdIngredient);
+        expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
+      });
     });
   });
 
