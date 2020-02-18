@@ -104,9 +104,24 @@ describe('RecipeService', () => {
     });
 
     it('On bad index, the recipe should not update', () => {
+      spyOn(service.recipesChanged, 'next');
       const updated = new Recipe('Test', 'description', 'testImane',[], 'Other');
       service.updateRecipe(1, updated);
-      expect(recipesChanged).toEqual(arrayOfRecipes);
+      expect(service.recipesChanged.next).not.toHaveBeenCalled();
+    });
+
+    describe('Recipe should be nill, and recipe should not updated', () => {
+      it('Parameter should be null', () => {
+        spyOn(service.recipesChanged, 'next');
+        service.updateRecipe(0, null);
+        expect(service.recipesChanged.next).not.toHaveBeenCalled();
+      });
+
+      it('Parameter should be undefined', () => {
+        spyOn(service.recipesChanged, 'next');
+        service.updateRecipe(0, undefined);
+        expect(service.recipesChanged.next).not.toHaveBeenCalled();
+      });
     });
   });
 
@@ -129,7 +144,6 @@ describe('RecipeService', () => {
       expect(recipesChanged).toEqual(arrayOfRecipes);
     })
   });
-
 
   describe('Add ingredients', () => {
     it('On addIngredientsToShoppingList, addIngredients should have been calles', () => {
