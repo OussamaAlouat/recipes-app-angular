@@ -30,7 +30,13 @@ describe('RecipeEditComponent', () => {
     false
   ];
 
+  let mockRouter:any;
+  class MockRouter {
+      navigate = jasmine.createSpy('navigate');
+  }
+
   beforeEach(async(() => {
+    mockRouter = new MockRouter();
     TestBed.configureTestingModule({
       declarations: [
         RecipeEditComponent,
@@ -49,7 +55,7 @@ describe('RecipeEditComponent', () => {
           }
         },
         {
-          provide: Router,
+          provide: Router, useValue: mockRouter,
         }
       ],
       imports: [ ReactiveFormsModule ]
@@ -152,7 +158,7 @@ describe('RecipeEditComponent', () => {
 
   describe('When submit the form', () => {
     it('onSubmit function should be called', () => {
-      spyOn(component, 'onSubmit');
+      spyOn(component, 'onSubmit').and.callThrough();
       component.recipeForm.controls.name.setValue('Tests');
       component.recipeForm.controls.description.setValue('Description test');
       component.recipeForm.controls.imagePath.setValue('This is the image path');
@@ -165,7 +171,7 @@ describe('RecipeEditComponent', () => {
     });
 
     it('redirectToRecipes function should be called', fakeAsync(() => {
-      spyOn(component , 'redirectToRecipes');
+      spyOn(component , 'redirectToRecipes').and.callThrough();
       component.recipeForm.controls.name.setValue('Tests');
       component.recipeForm.controls.description.setValue('Description test');
       component.recipeForm.controls.imagePath.setValue('This is the image path');
@@ -175,6 +181,19 @@ describe('RecipeEditComponent', () => {
       saveButton.click();
       fixture.detectChanges();
       expect(component.redirectToRecipes).toHaveBeenCalledTimes(1);
+      expect(mockRouter.navigate).toHaveBeenCalled();
     }));
+  });
+
+  describe('On click cancel', () => {
+    it('onCancel should have been called and on redirectToRecipes too', () => {
+      spyOn(component , 'onCancel').and.callThrough();
+      spyOn(component , 'redirectToRecipes').and.callThrough();
+      const cancelButton =fixture.debugElement.query(By.css('button.btn.btn-danger')).nativeElement;
+      cancelButton.click();
+      fixture.detectChanges();
+      expect(component.onCancel).toHaveBeenCalledTimes(1);
+      expect(component.redirectToRecipes).toHaveBeenCalledTimes(1);
+    });
   });
 });
