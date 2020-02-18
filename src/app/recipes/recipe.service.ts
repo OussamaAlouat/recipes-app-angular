@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Subject } from 'rxjs';
+import { isNil } from 'lodash';
 
 @Injectable()
 export class RecipeService {
@@ -27,14 +28,14 @@ export class RecipeService {
   }
 
   addRecipe(recipe: Recipe) {
-    if (recipe) {
+    if (this.isRecipeValdi(recipe)) {
       this.recipes.push(recipe);
       this.recipesChanged.next(this.recipes.slice());
     }
   }
 
   updateRecipe(index: number, recipe: Recipe) {
-    if (this.recipes[index] && recipe) {
+    if (this.recipes[index] && this.isRecipeValdi(recipe)) {
       this.recipes[index] = recipe;
       this.recipesChanged.next(this.recipes.slice());
     }
@@ -48,5 +49,18 @@ export class RecipeService {
   setRecipes(recipes: Recipe[]) {
     this.recipes = recipes;
     this.recipesChanged.next(this.recipes.slice());
+  }
+
+  private isRecipeValdi(recipe: Recipe) {
+    if (isNil(recipe)
+      || isNil(recipe.name)
+      || isNil(recipe.description)
+      || isNil(recipe.imagePath)
+      || isNil(recipe.typeOfRecipe)
+    ) {
+      return false;
+    }
+
+    return true;
   }
 }
