@@ -7,7 +7,7 @@ import { MockRecipeService } from './RecipeService.component';
   providedIn: 'root'
 })
 
-export class DataStorageService {
+export class DataStorageServiceMock {
   constructor(
     private http: HttpClient,
     private recipeService: MockRecipeService,
