@@ -196,4 +196,14 @@ describe('RecipeEditComponent', () => {
       expect(component.redirectToRecipes).toHaveBeenCalledTimes(1);
     });
   });
+
+  describe('On click on add ingredients', () => {
+    it('Should onAddIngredient() have been called', () => {
+      spyOn(component, 'onAddIngredient').and.callThrough();
+      const addIBtn = fixture.debugElement.query(By.css('#addIngredient > button')).nativeElement;
+      addIBtn.click();
+      fixture.detectChanges();
+      expect(component.onAddIngredient).toHaveBeenCalled();
+    });
+  });
 });
