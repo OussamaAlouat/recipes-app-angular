@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { RecipeService } from './recipes/recipe.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { RecipeStorageService } from './recipes/recipe.storage.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -20,7 +21,8 @@ describe('AppComponent', () => {
       ],
       providers: [
         RecipeService,
-        ShoppingListService
+        ShoppingListService,
+        RecipeStorageService,
       ]
     }).compileComponents();
   }));

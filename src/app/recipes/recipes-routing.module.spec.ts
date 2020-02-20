@@ -1,4 +1,4 @@
-import { Routes, Router, ActivatedRoute, ActivatedRouteSnapshot, RouterStateSnapshot, Resolve } from '@angular/router';
+import { Routes, Router } from '@angular/router';
 import { TestBed, async, fakeAsync, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Location } from '@angular/common';
@@ -20,6 +20,7 @@ import { FormInputComponent } from '../shared/form/form-input/form-input.compone
 import { FormTextAreaComponent } from '../shared/form/form-text-area/form-text-area.component';
 import { FormCheckboxesComponent } from '../shared/form/form-checkboxes/form-checkboxes.component';
 import { ButtonComponent } from '../shared/button/button.component';
+import { RecipeStorageService } from './recipe.storage.service';
 
 const routes: Routes = [
   {
@@ -64,7 +65,8 @@ describe('Recipes routing', () => {
         RecipeService,
         ShoppingListService,
         RecipesResolverServiceMock,
-        MockRecipeService
+        MockRecipeService,
+        RecipeStorageService
       ]
     });
 
