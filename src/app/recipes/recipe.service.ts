@@ -80,4 +80,13 @@ export class RecipeService {
 
     return true;
   }
+
+  fetchFromServer() {
+    this.recipesStorageService.fetchRecipes()
+      .subscribe((response: Recipe[]) => {
+        this.setRecipes(response);
+      }, (err) => {
+        console.log(err)
+      })
+  }
 }
