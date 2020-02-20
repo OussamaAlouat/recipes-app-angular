@@ -43,4 +43,8 @@ export class DataStorageService {
       })
     );
   }
+
+  deleteRecipe(recipe: Recipe) {
+    return this.http.delete('http://localhost:3000/recipes/'+ recipe.id)
+  }
 }
