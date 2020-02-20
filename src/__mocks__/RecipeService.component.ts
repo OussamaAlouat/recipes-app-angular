@@ -27,4 +27,8 @@ export class MockRecipeService {
   getRecipes() {
     return this.recipes;
   }
+
+  fetchFromServer() {
+    return this.recipes;
+  }
 }
