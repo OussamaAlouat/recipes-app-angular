@@ -85,12 +85,7 @@ describe('HeaderComponent', () => {
       expect(compiled.querySelector('.nav.navbar-nav.navbar-right > li > a').textContent).toContain('Logout');
     });
 
-    describe('Manage menu should have two anchors', () => {
-      it('One anchor should be "Save data', () => {
-        const compiled = fixture.debugElement.nativeElement;
-        expect(compiled.querySelector('.dropdown-menu > li').textContent).toContain('Save data');
-      });
-
+    describe('Manage menu should have one anchor', () => {
       it('The other anchor should be "Fetch data', () => {
         const compiled = fixture.debugElement.nativeElement;
         expect(compiled.querySelector('.dropdown-menu li:last-child').textContent).toContain('Fetch data');
@@ -99,14 +94,6 @@ describe('HeaderComponent', () => {
   });
 
   describe('Should have been called on functions', () => {
-    it('On click on saveData anchor, onSaveData function should have been called', () => {
-      spyOn(component, 'onSaveData').and.callThrough();
-      const saveDataButton = fixture.debugElement.query(By.css('#saveData')).nativeElement;
-      saveDataButton.click();
-      fixture.detectChanges();
-      expect(component.onSaveData).toHaveBeenCalled();
-    });
-
     it('On click on fetchData, onFetchData function should have been called', () => {
       spyOn(component, 'onFetchData').and.callThrough();
       const saveDataButton = fixture.debugElement.query(By.css('#fetchData')).nativeElement;
