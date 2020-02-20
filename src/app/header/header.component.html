@@ -34,7 +34,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a style="cursor: pointer;" (click)="onLogout()">Logout</a>
+          <a style="cursor: pointer;" (click)="onLogout()" id="logout">Logout</a>
         </li>
         <li class="dropdown" appDropdown>
           <a style="cursor: pointer;" class="dropdown-toggle" role="button">
@@ -42,8 +42,17 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a style="cursor: pointer;" (click)="onSaveData()">Save data</a></li>
-            <li><a style="cursor: pointer;" (click)="onFetchData()">Fetch data</a></li>
+            <li>
+              <a id="saveData" style="cursor: pointer;" (click)="onSaveData()"
+              >
+                Save data
+              </a>
+            </li>
+            <li>
+              <a id="fetchData" style="cursor: pointer;" (click)="onFetchData()">
+                Fetch data
+              </a>
+            </li>
           </ul>
         </li>
       </ul>

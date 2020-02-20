@@ -11,6 +11,9 @@ import { FormInputComponent } from 'src/app/shared/form/form-input/form-input.co
 import { FormTextAreaComponent } from 'src/app/shared/form/form-text-area/form-text-area.component';
 import { FormCheckboxesComponent } from 'src/app/shared/form/form-checkboxes/form-checkboxes.component';
 import { ButtonComponent } from 'src/app/shared/button/button.component';
+import { RecipeStorageService } from '../recipe.storage.service';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 // Function needed to validate checkboxes
 export function minSelectedCheckboxes (formArray: FormArray): {required: boolean} | null {
@@ -30,7 +33,13 @@ describe('RecipeEditComponent', () => {
     false
   ];
 
+  let mockRouter:any;
+  class MockRouter {
+    navigate = jasmine.createSpy('navigate');
+  }
+
   beforeEach(async(() => {
+    mockRouter = new MockRouter();
     TestBed.configureTestingModule({
       declarations: [
         RecipeEditComponent,
@@ -40,7 +49,10 @@ describe('RecipeEditComponent', () => {
         ButtonComponent,
       ],
       providers: [
+        HttpHandler,
+        HttpClient,
         RecipeService,
+        RecipeStorageService,
         ShoppingListService,
         {
           provide: ActivatedRoute,
@@ -49,7 +61,7 @@ describe('RecipeEditComponent', () => {
           }
         },
         {
-          provide: Router,
+          provide: Router, useValue: mockRouter,
         }
       ],
       imports: [ ReactiveFormsModule ]
@@ -152,7 +164,7 @@ describe('RecipeEditComponent', () => {
 
   describe('When submit the form', () => {
     it('onSubmit function should be called', () => {
-      spyOn(component, 'onSubmit');
+      spyOn(component, 'onSubmit').and.callThrough();
       component.recipeForm.controls.name.setValue('Tests');
       component.recipeForm.controls.description.setValue('Description test');
       component.recipeForm.controls.imagePath.setValue('This is the image path');
@@ -165,7 +177,7 @@ describe('RecipeEditComponent', () => {
     });
 
     it('redirectToRecipes function should be called', fakeAsync(() => {
-      spyOn(component , 'redirectToRecipes');
+      spyOn(component , 'redirectToRecipes').and.callThrough();
       component.recipeForm.controls.name.setValue('Tests');
       component.recipeForm.controls.description.setValue('Description test');
       component.recipeForm.controls.imagePath.setValue('This is the image path');
@@ -175,6 +187,29 @@ describe('RecipeEditComponent', () => {
       saveButton.click();
       fixture.detectChanges();
       expect(component.redirectToRecipes).toHaveBeenCalledTimes(1);
+      expect(mockRouter.navigate).toHaveBeenCalled();
     }));
+  });
+
+  describe('On click cancel', () => {
+    it('onCancel should have been called and on redirectToRecipes too', () => {
+      spyOn(component , 'onCancel').and.callThrough();
+      spyOn(component , 'redirectToRecipes').and.callThrough();
+      const cancelButton =fixture.debugElement.query(By.css('button.btn.btn-danger')).nativeElement;
+      cancelButton.click();
+      fixture.detectChanges();
+      expect(component.onCancel).toHaveBeenCalledTimes(1);
+      expect(component.redirectToRecipes).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('On click on add ingredients', () => {
+    it('Should onAddIngredient() have been called', () => {
+      spyOn(component, 'onAddIngredient').and.callThrough();
+      const addIBtn = fixture.debugElement.query(By.css('#addIngredient > button')).nativeElement;
+      addIBtn.click();
+      fixture.detectChanges();
+      expect(component.onAddIngredient).toHaveBeenCalled();
+    });
   });
 });

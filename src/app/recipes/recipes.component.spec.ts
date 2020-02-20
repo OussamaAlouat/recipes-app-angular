@@ -1,13 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from "@angular/router/testing";
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 import { RecipesComponent } from './recipes.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipeItemComponent } from './recipe-list/recipe-item/recipe-item.component';
+import { ButtonComponent } from '../shared/button/button.component';
 
 import { RecipeService } from './recipe.service';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
-import { ButtonComponent } from '../shared/button/button.component';
+import { RecipeStorageService } from './recipe.storage.service';
 
 describe('RecipesComponent', () => {
   let component: RecipesComponent;
@@ -17,7 +19,7 @@ describe('RecipesComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ RecipesComponent, RecipeListComponent, RecipeItemComponent, ButtonComponent ],
       imports: [ RouterTestingModule ],
-      providers: [ RecipeService, ShoppingListService ]
+      providers: [ RecipeService, ShoppingListService, RecipeStorageService, HttpClient, HttpHandler ]
     })
     .compileComponents();
   }));

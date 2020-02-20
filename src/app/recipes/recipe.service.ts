@@ -4,13 +4,17 @@ import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Subject } from 'rxjs';
 import { isNil } from 'lodash';
+import { RecipeStorageService } from './recipe.storage.service';
 
 @Injectable()
 export class RecipeService {
   private recipes: Recipe [];
   public recipesChanged: Subject<Recipe []>;
 
-  constructor(private slService: ShoppingListService) {
+  constructor(
+    private slService: ShoppingListService,
+    private recipesStorageService: RecipeStorageService)
+  {
     this.recipes = [];
     this.recipesChanged = new Subject();
   }
@@ -29,8 +33,13 @@ export class RecipeService {
 
   addRecipe(recipe: Recipe) {
     if (this.isRecipeValdi(recipe)) {
-      this.recipes.push(recipe);
-      this.recipesChanged.next(this.recipes.slice());
+      this.recipesStorageService.saveRecipe(recipe)
+        .subscribe((response) => {
+          this.recipes.push(recipe);
+          this.recipesChanged.next(this.recipes.slice());
+        }, (err) => {
+          console.log(err);
+        });
     }
   }
 
@@ -42,8 +51,16 @@ export class RecipeService {
   }
 
   deleteRecipe(index: number) {
-    this.recipes.splice(index, 1);
-    this.recipesChanged.next(this.recipes.slice());
+    if(this.recipes[index]) {
+      const recipeToDelete = this.recipes[index];
+      this.recipesStorageService.deleteRecipe(recipeToDelete.id)
+        .subscribe((response) => {
+          this.recipes.splice(index, 1);
+          this.recipesChanged.next(this.recipes.slice());
+        }, (err) => {
+          console.log(err);
+        });
+    }
   }
 
   setRecipes(recipes: Recipe[]) {

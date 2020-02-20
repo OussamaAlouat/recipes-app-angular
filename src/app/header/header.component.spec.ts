@@ -5,6 +5,22 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HeaderComponent } from './header.component';
 import { RecipeService } from '../recipes/recipe.service';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { By } from '@angular/platform-browser';
+import { MockRecipeService } from 'src/__mocks__/RecipeService.component';
+import { AuthService } from '../auth/auth.service';
+import { BehaviorSubject } from 'rxjs';
+import { User } from '../auth/user.model';
+
+class AuthServiceMock {
+  public user: BehaviorSubject<User>;
+  constructor() {
+    this.user = new BehaviorSubject(null);
+  }
+
+  logout() {
+    return;
+  }
+}
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -14,7 +30,16 @@ describe('HeaderComponent', () => {
     TestBed.configureTestingModule({
       declarations: [HeaderComponent ],
       imports: [ RouterTestingModule, HttpClientTestingModule ],
-      providers: [ RecipeService, ShoppingListService ]
+      providers: [
+        {
+          provide: RecipeService,
+          useClass: MockRecipeService
+        },
+        {
+          provide: AuthService,
+          useClass: AuthServiceMock
+        },
+        ShoppingListService ]
     })
     .compileComponents();
   }));
@@ -72,5 +97,31 @@ describe('HeaderComponent', () => {
       });
     });
   });
+
+  describe('Should have been called on functions', () => {
+    it('On click on saveData anchor, onSaveData function should have been called', () => {
+      spyOn(component, 'onSaveData').and.callThrough();
+      const saveDataButton = fixture.debugElement.query(By.css('#saveData')).nativeElement;
+      saveDataButton.click();
+      fixture.detectChanges();
+      expect(component.onSaveData).toHaveBeenCalled();
+    });
+
+    it('On click on fetchData, onFetchData function should have been called', () => {
+      spyOn(component, 'onFetchData').and.callThrough();
+      const saveDataButton = fixture.debugElement.query(By.css('#fetchData')).nativeElement;
+      saveDataButton.click();
+      fixture.detectChanges();
+      expect(component.onFetchData).toHaveBeenCalled();
+    });
+
+    it('On click on logout, onLogout function should have been called', () => {
+      spyOn(component, 'onLogout').and.callThrough();
+      const saveDataButton = fixture.debugElement.query(By.css('#logout')).nativeElement;
+      saveDataButton.click();
+      fixture.detectChanges();
+      expect(component.onLogout).toHaveBeenCalled();
+    });
+  })
 });
 

@@ -4,6 +4,9 @@ import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import { clone } from 'lodash';
+import { RecipeStorageService } from './recipe.storage.service';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { of } from 'rxjs';
 
 describe('RecipeService', () => {
   const recipeItem = new Recipe('A test recipe', 'This is a simple test',
@@ -12,12 +15,23 @@ describe('RecipeService', () => {
   const arrayOfRecipes: Recipe[] = [recipeItem];
   const expectedIngredients = [ new Ingredient('Apple', 2), new Ingredient('Orange', 1)]
   let shoppingListServiceMock;
+  let recipesStorageServiceMock;
 
   beforeEach( async() => {
     shoppingListServiceMock = jasmine.createSpyObj(['addIngredients']);
     shoppingListServiceMock.addIngredients.and.returnValue(expectedIngredients);
+    recipesStorageServiceMock = jasmine.createSpyObj(['saveRecipe', 'deleteRecipe']);
+    recipesStorageServiceMock.saveRecipe.and.returnValue(of({ ...recipeItem }));
+    recipesStorageServiceMock.deleteRecipe.and.returnValue(of({ ...recipeItem }));
+
     TestBed.configureTestingModule({
-      providers: [RecipeService,
+      providers: [
+        HttpClient,
+        HttpHandler,
+        RecipeService,
+        {
+          provide: RecipeStorageService, useValue: recipesStorageServiceMock
+        },
         {
           provide: ShoppingListService, useValue: shoppingListServiceMock
         }
@@ -168,9 +182,10 @@ describe('RecipeService', () => {
     });
 
     it('On not valid index, recipes should not changed', () => {
+      spyOn(service, 'deleteRecipe').and.callThrough();
       service.deleteRecipe(1);
-      expect(recipesChanged).toEqual(arrayOfRecipes);
-    })
+      expect(service.deleteRecipe).toHaveBeenCalled();
+    });
   });
 
   describe('Add ingredients', () => {
