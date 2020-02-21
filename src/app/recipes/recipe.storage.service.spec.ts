@@ -58,6 +58,14 @@ describe('Recipes storage service', () => {
     httpMock.verify();
   });
 
+  it('Should delete a recipe', () => {
+    service.deleteRecipe(1).subscribe((response: any) => {
+      expect(response).toEqual({});
+    });
 
-
+    const req = httpMock.expectOne(`http://localhost:3000/recipes/1`);
+    expect(req.request.method).toBe('DELETE');
+    req.flush({});
+    httpMock.verify();
+  });
 });
