@@ -139,6 +139,15 @@ describe('RecipeService', () => {
       expect(service.recipesChanged.next).not.toHaveBeenCalled();
     });
 
+    it('Should not update, should recive an error from server', () => {
+      recipesStorageServiceMock.updateRecipe.and.throwError('Server error');
+      spyOn(service, 'updateRecipe');
+      const updated = new Recipe('Test', 'description', 'testImane',[], 'Other');
+      service.updateRecipe(0, updated);
+      expect(service.updateRecipe).toHaveBeenCalled();
+      expect(recipesStorageServiceMock.updateRecipe).toThrow();
+    });
+
     describe('Recipe should be nill or empty, and recipe should not updated', () => {
       it('Parameter should be null', () => {
         spyOn(service.recipesChanged, 'next');
