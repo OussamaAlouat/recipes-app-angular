@@ -68,4 +68,28 @@ describe('Recipes storage service', () => {
     req.flush({});
     httpMock.verify();
   });
+
+  it('Should update a recipe', () => {
+    spyOn(service, 'updateRecipe').and.callThrough();
+    recipeItem.id = 3;
+    const newRecipe = new Recipe('New test', 'Test desc', 'No image for test', [], 'Other');
+    const expected = { ...newRecipe, id: 3 };
+    service.updateRecipe(3, newRecipe).subscribe((response) => {
+      expect(response).toEqual(expected);
+    });
+
+    const req = httpMock.expectOne(`http://localhost:3000/recipes/3`);
+    expect(req.request.method).toBe('PUT');
+    expect(req.request.body).toEqual(newRecipe);
+    req.flush({
+      name: "New test",
+      description: "Test desc",
+      imagePath: "No image for test",
+      ingredients: [],
+      typeOfRecipe: "Other",
+      id: 3
+    });
+    httpMock.verify();
+    expect(service.updateRecipe).toHaveBeenCalled();
+  })
 });
