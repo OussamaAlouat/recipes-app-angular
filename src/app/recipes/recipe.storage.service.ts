@@ -25,4 +25,8 @@ export class RecipeStorageService {
       })
     );
   }
+
+  updateRecipe(id: number, recipe: Recipe) {
+    return this.http.put('http://localhost:3000/recipes/' + id, recipe);
+  }
 }

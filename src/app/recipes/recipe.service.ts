@@ -45,8 +45,13 @@ export class RecipeService {
 
   updateRecipe(index: number, recipe: Recipe) {
     if (this.recipes[index] && this.isRecipeValdi(recipe)) {
-      this.recipes[index] = recipe;
-      this.recipesChanged.next(this.recipes.slice());
+      this.recipesStorageService.updateRecipe(this.recipes[index].id, recipe)
+        .subscribe((response) => {
+          this.recipes[index] = recipe;
+          this.recipesChanged.next(this.recipes.slice());
+        }, (err) => {
+          console.log(err)
+        });
     }
   }
 
