@@ -20,10 +20,10 @@ describe('RecipeService', () => {
   beforeEach( async() => {
     shoppingListServiceMock = jasmine.createSpyObj(['addIngredients']);
     shoppingListServiceMock.addIngredients.and.returnValue(expectedIngredients);
-    recipesStorageServiceMock = jasmine.createSpyObj(['saveRecipe', 'deleteRecipe']);
+    recipesStorageServiceMock = jasmine.createSpyObj(['saveRecipe', 'deleteRecipe', 'updateRecipe']);
     recipesStorageServiceMock.saveRecipe.and.returnValue(of({ ...recipeItem }));
     recipesStorageServiceMock.deleteRecipe.and.returnValue(of({ ...recipeItem }));
-
+    recipesStorageServiceMock.updateRecipe.and.returnValue(of({ ...recipeItem }))
     TestBed.configureTestingModule({
       providers: [
         HttpClient,
