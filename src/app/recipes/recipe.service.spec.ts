@@ -20,10 +20,11 @@ describe('RecipeService', () => {
   beforeEach( async() => {
     shoppingListServiceMock = jasmine.createSpyObj(['addIngredients']);
     shoppingListServiceMock.addIngredients.and.returnValue(expectedIngredients);
-    recipesStorageServiceMock = jasmine.createSpyObj(['saveRecipe', 'deleteRecipe', 'updateRecipe']);
+    recipesStorageServiceMock = jasmine.createSpyObj(['saveRecipe','fetchRecipes' ,'deleteRecipe', 'updateRecipe']);
     recipesStorageServiceMock.saveRecipe.and.returnValue(of({ ...recipeItem }));
     recipesStorageServiceMock.deleteRecipe.and.returnValue(of({ ...recipeItem }));
     recipesStorageServiceMock.updateRecipe.and.returnValue(of({ ...recipeItem }))
+    recipesStorageServiceMock.fetchRecipes.and.returnValue(of(arrayOfRecipes))
     TestBed.configureTestingModule({
       providers: [
         HttpClient,
@@ -192,6 +193,24 @@ describe('RecipeService', () => {
     it('On addIngredientsToShoppingList, addIngredients should have been calles', () => {
       service.addIngredientsToShoppingList(expectedIngredients);
       expect(shoppingListServiceMock.addIngredients).toHaveBeenCalled();
+    });
+  });
+
+  describe('Fetch from server', () => {
+    it('On fetch form server, should get recipes', () => {
+      spyOn(service, 'fetchFromServer').and.callThrough();
+      spyOn(service, 'setRecipes');
+      service.fetchFromServer();
+      expect(service.fetchFromServer).toHaveBeenCalled();
+      expect(service.setRecipes).toHaveBeenCalled();
+    });
+
+  it('On fetch from server, should get error', () => {
+      recipesStorageServiceMock.fetchRecipes.and.throwError('Server error');
+      spyOn(service, 'fetchFromServer');
+      service.fetchFromServer();
+      expect(service.fetchFromServer).toHaveBeenCalled();
+      expect(recipesStorageServiceMock.fetchRecipes).toThrow();
     });
   });
 });
