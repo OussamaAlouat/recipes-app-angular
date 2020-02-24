@@ -21,4 +21,8 @@ export class ShoppingListStorageService{
   getIngredient(id: number) {
     return this.http.get<Ingredient>('http://localhost:3000/ingredients/' + id);
   }
+
+  updateIngredient(id: number, ingredient: Ingredient) {
+    return this.http.put('http://localhost:3000/ingredients/' + id, ingredient);
+  }
 }
