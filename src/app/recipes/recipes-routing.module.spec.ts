@@ -21,6 +21,7 @@ import { FormTextAreaComponent } from '../shared/form/form-text-area/form-text-a
 import { FormCheckboxesComponent } from '../shared/form/form-checkboxes/form-checkboxes.component';
 import { ButtonComponent } from '../shared/button/button.component';
 import { RecipeStorageService } from './recipe.storage.service';
+import { ShoppingListStorageService } from '../shopping-list/shopping-list.storage.service';
 
 const routes: Routes = [
   {
@@ -66,7 +67,8 @@ describe('Recipes routing', () => {
         ShoppingListService,
         RecipesResolverServiceMock,
         MockRecipeService,
-        RecipeStorageService
+        RecipeStorageService,
+        ShoppingListStorageService
       ]
     });
 

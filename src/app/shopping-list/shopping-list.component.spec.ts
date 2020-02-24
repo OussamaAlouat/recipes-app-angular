@@ -6,6 +6,8 @@ import { ShoppingEditComponent } from './shopping-edit/shopping-edit.component';
 import { ButtonComponent } from '../shared/button/button.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormInputComponent } from '../shared/form/form-input/form-input.component';
+import { ShoppingListStorageService } from './shopping-list.storage.service';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 describe('ShoppingListComponent', () => {
   let component: ShoppingListComponent;
@@ -19,7 +21,12 @@ describe('ShoppingListComponent', () => {
         ButtonComponent,
         FormInputComponent
       ],
-      providers: [ ShoppingListService ],
+      providers: [
+        ShoppingListService,
+        ShoppingListStorageService,
+        HttpClient,
+        HttpHandler,
+      ],
       imports: [ReactiveFormsModule]
     })
     .compileComponents();

@@ -10,6 +10,7 @@ import { ButtonComponent } from '../shared/button/button.component';
 import { RecipeService } from './recipe.service';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { RecipeStorageService } from './recipe.storage.service';
+import { ShoppingListStorageService } from '../shopping-list/shopping-list.storage.service';
 
 describe('RecipesComponent', () => {
   let component: RecipesComponent;
@@ -19,7 +20,14 @@ describe('RecipesComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ RecipesComponent, RecipeListComponent, RecipeItemComponent, ButtonComponent ],
       imports: [ RouterTestingModule ],
-      providers: [ RecipeService, ShoppingListService, RecipeStorageService, HttpClient, HttpHandler ]
+      providers: [
+        RecipeService,
+        ShoppingListService,
+        RecipeStorageService,
+        HttpClient,
+        HttpHandler,
+        ShoppingListStorageService
+      ]
     })
     .compileComponents();
   }));

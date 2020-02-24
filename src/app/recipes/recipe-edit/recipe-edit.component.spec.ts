@@ -13,7 +13,7 @@ import { FormCheckboxesComponent } from 'src/app/shared/form/form-checkboxes/for
 import { ButtonComponent } from 'src/app/shared/button/button.component';
 import { RecipeStorageService } from '../recipe.storage.service';
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ShoppingListStorageService } from 'src/app/shopping-list/shopping-list.storage.service';
 
 // Function needed to validate checkboxes
 export function minSelectedCheckboxes (formArray: FormArray): {required: boolean} | null {
@@ -54,6 +54,7 @@ describe('RecipeEditComponent', () => {
         RecipeService,
         RecipeStorageService,
         ShoppingListService,
+        ShoppingListStorageService,
         {
           provide: ActivatedRoute,
           useValue: {
@@ -63,6 +64,7 @@ describe('RecipeEditComponent', () => {
         {
           provide: Router, useValue: mockRouter,
         }
+
       ],
       imports: [ ReactiveFormsModule ]
     })

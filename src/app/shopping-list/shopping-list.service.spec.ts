@@ -2,6 +2,8 @@ import { ShoppingListService } from "./shopping-list.service";
 import { TestBed } from '@angular/core/testing';
 import { Ingredient } from '../shared/ingredient.model';
 import { find } from 'lodash';
+import { ShoppingListStorageService } from './shopping-list.storage.service';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 describe('ShoppingListService', () => {
   let service: ShoppingListService;
@@ -13,7 +15,12 @@ describe('ShoppingListService', () => {
 
   beforeEach( async() => {
     TestBed.configureTestingModule({
-      providers: [ShoppingListService]
+      providers: [
+        ShoppingListService,
+        ShoppingListStorageService,
+        HttpClient,
+        HttpHandler
+      ]
     });
 
     service = TestBed.get(ShoppingListService);
