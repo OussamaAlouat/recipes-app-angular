@@ -5,8 +5,8 @@ import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import { clone } from 'lodash';
 import { RecipeStorageService } from './recipe.storage.service';
-import { HttpClient, HttpHandler } from '@angular/common/http';
 import { of } from 'rxjs';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('RecipeService', () => {
   const recipeItem = new Recipe('A test recipe', 'This is a simple test',
@@ -27,8 +27,6 @@ describe('RecipeService', () => {
     recipesStorageServiceMock.fetchRecipes.and.returnValue(of(arrayOfRecipes))
     TestBed.configureTestingModule({
       providers: [
-        HttpClient,
-        HttpHandler,
         RecipeService,
         {
           provide: RecipeStorageService, useValue: recipesStorageServiceMock
@@ -37,6 +35,7 @@ describe('RecipeService', () => {
           provide: ShoppingListService, useValue: shoppingListServiceMock
         }
       ],
+      imports: [ HttpClientTestingModule ]
     });
 
     service = TestBed.get(RecipeService);

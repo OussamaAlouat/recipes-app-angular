@@ -12,8 +12,8 @@ import { FormTextAreaComponent } from 'src/app/shared/form/form-text-area/form-t
 import { FormCheckboxesComponent } from 'src/app/shared/form/form-checkboxes/form-checkboxes.component';
 import { ButtonComponent } from 'src/app/shared/button/button.component';
 import { RecipeStorageService } from '../recipe.storage.service';
-import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ShoppingListStorageService } from 'src/app/shopping-list/shopping-list.storage.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 // Function needed to validate checkboxes
 export function minSelectedCheckboxes (formArray: FormArray): {required: boolean} | null {
@@ -49,8 +49,6 @@ describe('RecipeEditComponent', () => {
         ButtonComponent,
       ],
       providers: [
-        HttpHandler,
-        HttpClient,
         RecipeService,
         RecipeStorageService,
         ShoppingListService,
@@ -66,7 +64,7 @@ describe('RecipeEditComponent', () => {
         }
 
       ],
-      imports: [ ReactiveFormsModule ]
+      imports: [ ReactiveFormsModule, HttpClientTestingModule ]
     })
     .compileComponents();
   }));

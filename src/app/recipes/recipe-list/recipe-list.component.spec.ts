@@ -6,6 +6,7 @@ import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 import { ButtonComponent } from 'src/app/shared/button/button.component';
 import { MockRecipeService } from 'src/__mocks__/RecipeService.component';
 import { RecipeService } from '../recipe.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('RecipeListComponent', () => {
   let component: RecipeListComponent;
@@ -21,7 +22,7 @@ describe('RecipeListComponent', () => {
           useClass: MockRecipeService,
         }
       ],
-      imports: [ RouterTestingModule ]
+      imports: [ RouterTestingModule ,HttpClientTestingModule ]
    })
     .compileComponents();
   }));
