@@ -25,10 +25,11 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       (index: number) => {
         this.editMode = true;
         this.editedItemIndex = index;
-        this.editedItem = this.shoppingListService.getIngredient(index);
-
-        this.shoppingForm.controls.name.setValue(this.editedItem.name);
-        this.shoppingForm.controls.amount.setValue(this.editedItem.amount);
+        this.shoppingListService.getIngredient(index).subscribe((response) => {
+          this.editedItem = response;
+          this.shoppingForm.controls.name.setValue(this.editedItem.name);
+          this.shoppingForm.controls.amount.setValue(this.editedItem.amount);
+        })
       }
     );
   }
@@ -59,7 +60,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   }
 
   onRemove(){
-    this.shoppingListService.removeIngreditent(this.editedItemIndex);
+    this.shoppingListService.removeIngreditent(this.editedItem.id);
     this.editMode = false;
     this.shoppingForm.reset();
   }
