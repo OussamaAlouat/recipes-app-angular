@@ -50,9 +50,11 @@ export class ShoppingListService {
     }
   }
 
-  removeIngreditent(index: number) {
-    this.ingredients.splice(index, 1);
-    this.ingredientsChanged.next(this.ingredients.slice());
+  removeIngreditent(id: number) {
+    this.shoppingListStorage.removeIngredient(id)
+      .subscribe(() => {
+        this.fetchFromServer();
+      });
   }
 
   private isIngredientValid(ingredient: Ingredient) {
@@ -65,5 +67,12 @@ export class ShoppingListService {
     }
 
     return true
+  }
+
+  private fetchFromServer() {
+    this.shoppingListStorage.getIngredients()
+      .subscribe((response) => {
+          this.ingredientsChanged.next(response);
+      });
   }
 }
