@@ -80,7 +80,7 @@ describe('ShoppingListService', () => {
     });
 
     it('If ingredient exists, it shouldnt have been added', () => {
-      spyOn(service.ingredientsChanged,'next')
+      spyOn(service.ingredientsChanged,'next');
       const expectEdIngredient = new Ingredient('Apples', 5);
       service.addIngredient(expectEdIngredient);
       expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
@@ -194,22 +194,24 @@ describe('ShoppingListService', () => {
         new Ingredient('Banana', 10)
       ];
 
+      shoppingListStorageServiceMock.getIngredients.and.returnValue(of( [...expected, ...newIngredients] ));
       service.addIngredients(newIngredients);
       expect(ingredientsChanged.length).toBe(4);
+      expect(shoppingListStorageServiceMock.saveIngredient).toHaveBeenCalledTimes(2);
     });
 
     describe('The parameter should be nill or empty', () => {
       it('When the parameter is an empty array, should not add anithing', () => {
-        spyOn(service.ingredientsChanged, 'next');
         const newIngredients = [];
         service.addIngredients(newIngredients);
-        expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
+        expect(shoppingListStorageServiceMock.saveIngredient).not.toHaveBeenCalled();
       });
 
       it('The parameter should be null', () => {
         spyOn(service.ingredientsChanged, 'next');
         const newIngredients = null;
         service.addIngredients(newIngredients);
+        expect(shoppingListStorageServiceMock.saveIngredient).not.toHaveBeenCalled();
         expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
       });
 
@@ -217,6 +219,7 @@ describe('ShoppingListService', () => {
         spyOn(service.ingredientsChanged, 'next');
         const newIngredients = undefined;
         service.addIngredients(newIngredients);
+        expect(shoppingListStorageServiceMock.saveIngredient).not.toHaveBeenCalled();
         expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
       });
     });
