@@ -31,8 +31,7 @@ export class ShoppingListService {
     if (this.isIngredientValid(ingredient)) {
       this.shoppingListStorage.saveIngredient(ingredient)
         .subscribe((response) => {
-          this.ingredients.push(ingredient);
-          this.ingredientsChanged.next(this.ingredients.slice());
+          this.fetchFromServer();
         })
     }
   }
