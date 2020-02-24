@@ -17,11 +17,12 @@ describe('ShoppingListService', () => {
   ];
 
   beforeEach( async() => {
-    shoppingListStorageServiceMock = jasmine.createSpyObj(['saveIngredient', 'getIngredient', 'getIngredients', 'removeIngredient']);
+    shoppingListStorageServiceMock = jasmine.createSpyObj(['saveIngredient', 'getIngredient', 'getIngredients', 'removeIngredient', 'updateIngredient']);
     shoppingListStorageServiceMock.saveIngredient.and.returnValue(of( expected[0] ));
     shoppingListStorageServiceMock.getIngredients.and.returnValue(of( expected ));
     shoppingListStorageServiceMock.getIngredient.and.returnValue(of(expected[0]));
     shoppingListStorageServiceMock.removeIngredient.and.returnValue(of(expected[0]));
+    shoppingListStorageServiceMock.updateIngredient.and.returnValue(of(new Ingredient('Apples', 12)));
 
     TestBed.configureTestingModule({
       providers: [
@@ -118,17 +119,19 @@ describe('ShoppingListService', () => {
     });
 
     it('On update ingredient, should reflect this information on ingredients array', () => {
+      shoppingListStorageServiceMock.getIngredients.and.returnValue(of([new Ingredient('Orange', 2), new Ingredient('Tomatoes', 10)]));
       const expectEdIngredient = new Ingredient('Orange', 2);
       service.updateIngredient(0, expectEdIngredient);
       expect(ingredientsChanged.length).toBe(2);
       expect(ingredientsChanged[0]).toEqual(expectEdIngredient);
+      expect(shoppingListStorageServiceMock.updateIngredient).toHaveBeenCalledWith(0, expectEdIngredient);
     });
 
     it('On try to update not existing index, should return the ingredients array without changes', () => {
-      spyOn(service.ingredientsChanged,'next')
       const expectEdIngredient = new Ingredient('Orange', 2);
       service.updateIngredient(3, expectEdIngredient);
-      expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
+      expect(shoppingListStorageServiceMock.updateIngredient).toHaveBeenCalledWith(3, expectEdIngredient);
+      expect(ingredientsChanged).toEqual(expected);
     });
 
     describe('Ingredient should be nill or empty, and ingreident should not be modified', () => {
@@ -137,6 +140,7 @@ describe('ShoppingListService', () => {
         const expectEdIngredient = null;
         service.updateIngredient(0, expectEdIngredient);
         expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
+        expect(shoppingListStorageServiceMock.updateIngredient).not.toHaveBeenCalled();
       });
 
       it('Ingredient should be undefined', () => {
@@ -144,6 +148,7 @@ describe('ShoppingListService', () => {
         const expectEdIngredient = undefined;
         service.updateIngredient(0, expectEdIngredient);
         expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
+        expect(shoppingListStorageServiceMock.updateIngredient).not.toHaveBeenCalled();
       });
 
       it('Ingredient should be empty', () => {
@@ -151,6 +156,7 @@ describe('ShoppingListService', () => {
         const expectEdIngredient = { name: null, amount: null };
         service.updateIngredient(0, expectEdIngredient);
         expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
+        expect(shoppingListStorageServiceMock.updateIngredient).not.toHaveBeenCalled();
       });
     });
   });
