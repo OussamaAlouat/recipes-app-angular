@@ -1,5 +1,5 @@
 import { Ingredient } from '../shared/ingredient.model';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { find, isNil } from 'lodash';
 import { ShoppingListStorageService } from './shopping-list.storage.service';
 import { Injectable } from '@angular/core';
@@ -23,8 +23,8 @@ export class ShoppingListService {
     return this.shoppingListStorage.getIngredients();
   }
 
-  getIngredient(index: number) {
-    return this.ingredients[index];
+  getIngredient(index: number): Observable<Ingredient> {
+    return this.shoppingListStorage.getIngredient(index);;
   }
 
   addIngredient(ingredient: Ingredient) {
