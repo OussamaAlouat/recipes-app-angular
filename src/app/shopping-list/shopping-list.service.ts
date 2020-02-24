@@ -20,7 +20,7 @@ export class ShoppingListService {
   }
 
   getIngredients() {
-    return this.ingredients.slice();
+    return this.shoppingListStorage.getIngredients();
   }
 
   getIngredient(index: number) {
