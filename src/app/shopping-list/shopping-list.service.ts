@@ -47,8 +47,14 @@ export class ShoppingListService {
 
   addIngredients(ingredients: Ingredient []) {
     if (ingredients && ingredients.length) {
-      this.ingredients.push(...ingredients);
-      this.ingredientsChanged.next(this.ingredients.slice());
+      for(let i = 0; i < ingredients.length; i++) {
+        const ingredient = ingredients[i];
+        if (this.isIngredientValid(ingredient)) {
+          this.shoppingListStorage.saveIngredient(ingredient).subscribe();
+        }
+      }
+
+      this.fetchFromServer();
     }
   }
 
@@ -74,6 +80,7 @@ export class ShoppingListService {
   private fetchFromServer() {
     this.shoppingListStorage.getIngredients()
       .subscribe((response) => {
+          this.ingredients = response;
           this.ingredientsChanged.next(response);
       });
   }
