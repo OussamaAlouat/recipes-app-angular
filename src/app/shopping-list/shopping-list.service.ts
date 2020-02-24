@@ -1,13 +1,16 @@
 import { Ingredient } from '../shared/ingredient.model';
 import { Subject } from 'rxjs';
 import { find, isNil } from 'lodash';
+import { ShoppingListStorageService } from './shopping-list.storage.service';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class ShoppingListService {
   ingredientsChanged= new Subject<Ingredient[]>();
   public startedEditing: Subject<number>;
   private ingredients: Ingredient[];
 
-  constructor() {
+  constructor(private shoppingListStorage: ShoppingListStorageService) {
     this.ingredients = [
       new Ingredient('Apples', 5),
       new Ingredient('Tomatoes', 10)
@@ -26,6 +29,10 @@ export class ShoppingListService {
 
   addIngredient(ingredient: Ingredient) {
     if (this.isIngredientValid(ingredient)) {
+      this.shoppingListStorage.saveIngredient(ingredient)
+        .subscribe((response) => {
+          console.log(response)
+        })
       this.ingredients.push(ingredient);
       this.ingredientsChanged.next(this.ingredients.slice());
     }
