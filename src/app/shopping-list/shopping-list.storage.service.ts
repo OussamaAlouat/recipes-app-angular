@@ -9,6 +9,11 @@ export class ShoppingListStorageService{
   saveIngredient(ingredient: Ingredient) {
     return this.http.post('http://localhost:3000/ingredients', ingredient);
   }
+
+  removeIngredient(id: number) {
+    return this.http.delete('http://localhost:3000/ingredients/'+ id)
+  }
+
   getIngredients() {
     return this.http.get<Ingredient[]>('http://localhost:3000/ingredients');
   }
