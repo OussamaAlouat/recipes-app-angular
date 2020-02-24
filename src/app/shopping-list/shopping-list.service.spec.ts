@@ -1,15 +1,15 @@
 import { ShoppingListService } from "./shopping-list.service";
-import { TestBed } from '@angular/core/testing';
+import { TestBed, fakeAsync } from '@angular/core/testing';
 import { Ingredient } from '../shared/ingredient.model';
 import { find } from 'lodash';
 import { ShoppingListStorageService } from './shopping-list.storage.service';
-import { HttpClient, HttpHandler } from '@angular/common/http';
 import { of } from 'rxjs';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ShoppingListService', () => {
   let service: ShoppingListService;
   let ingredientsChanged;
-  let ShoppingListStorageServiceMock;
+  let shoppingListStorageServiceMock;
 
   const expected = [
     new Ingredient('Apples', 5),
@@ -17,19 +17,21 @@ describe('ShoppingListService', () => {
   ];
 
   beforeEach( async() => {
-    ShoppingListStorageServiceMock = jasmine.createSpyObj(['saveIngredient', '']);
-    ShoppingListStorageServiceMock.saveIngredient.and.returnValue(of({ ...expected[0] }));
+    shoppingListStorageServiceMock = jasmine.createSpyObj(['saveIngredient', 'getIngredient', 'getIngredients', 'removeIngredient']);
+    shoppingListStorageServiceMock.saveIngredient.and.returnValue(of( expected[0] ));
+    shoppingListStorageServiceMock.getIngredients.and.returnValue(of( expected ));
+    shoppingListStorageServiceMock.getIngredient.and.returnValue(of(expected[0]));
+    shoppingListStorageServiceMock.removeIngredient.and.returnValue(of(expected[0]));
 
     TestBed.configureTestingModule({
       providers: [
         ShoppingListService,
-        HttpClient,
-        HttpHandler,
         {
           provide: ShoppingListStorageService,
-          useValue: ShoppingListStorageServiceMock
+          useValue: shoppingListStorageServiceMock
         }
-      ]
+      ],
+      imports: [HttpClientTestingModule]
     });
 
     service = TestBed.get(ShoppingListService);
@@ -40,31 +42,29 @@ describe('ShoppingListService', () => {
   });
 
   describe('Get Ingredients', () => {
-    it('Should return an array of ingredients as expected', () => {
-      const recived = service.getIngredients();
-      expect(recived).toEqual(expected);
+    it('Should return an array of ingredients as expected', async() => {
+      const response = await service.getIngredients().toPromise();
+      expect(response).toEqual(expected);
+      expect(shoppingListStorageServiceMock.getIngredients).toHaveBeenCalled();
     });
   });
 
   describe('Get ingredient', () => {
-    beforeEach(() => {
-      service = TestBed.get(ShoppingListService);
-    });
-
-    it('An ingredient should be the same as expected', () => {
-      const recived = service.getIngredient(0);
+    it('An ingredient should be the same as expected', async() => {
+      let recived = await service.getIngredient(0).toPromise();
       expect(recived).toEqual(expected[0]);
+      expect(shoppingListStorageServiceMock.getIngredient).toHaveBeenCalled();
     });
 
-    it('Response should be undefined', () => {
-      const recived = service.getIngredient(3);
+    it('Response should be undefined', async() => {
+      shoppingListStorageServiceMock.getIngredient.and.returnValue(of(undefined));
+      let recived = await service.getIngredient(0).toPromise();
       expect(recived).toBeUndefined();
     });
   });
 
   describe('addIngredient', () => {
     beforeEach(() => {
-      service = TestBed.get(ShoppingListService);
       service.ingredientsChanged.subscribe((response) => {
         ingredientsChanged = response;
       });
@@ -72,6 +72,7 @@ describe('ShoppingListService', () => {
 
     it('The array of ingredients should contains the new ingredient', () => {
       const expectEdIngredient = new Ingredient('Orange', 2);
+      shoppingListStorageServiceMock.getIngredients.and.returnValue(of( [...expected, expectEdIngredient] ));
       service.addIngredient(expectEdIngredient);
       expect(ingredientsChanged.length).toBe(3);
       expect(find(ingredientsChanged, expectEdIngredient)).toEqual(expectEdIngredient)
@@ -82,6 +83,7 @@ describe('ShoppingListService', () => {
       const expectEdIngredient = new Ingredient('Apples', 5);
       service.addIngredient(expectEdIngredient);
       expect(service.ingredientsChanged.next).not.toHaveBeenCalled();
+      expect(shoppingListStorageServiceMock.saveIngredient).not.toHaveBeenCalled();
     });
 
     describe('Parameter should be nill or empty and the array should not been modified', () => {
@@ -110,7 +112,6 @@ describe('ShoppingListService', () => {
 
   describe('Update ingredient', () => {
     beforeEach(() => {
-      service = TestBed.get(ShoppingListService);
       service.ingredientsChanged.subscribe((response) => {
         ingredientsChanged = response;
       });
@@ -156,26 +157,26 @@ describe('ShoppingListService', () => {
 
   describe('Remove ingredients', () => {
     beforeEach(() => {
-      service = TestBed.get(ShoppingListService);
       service.ingredientsChanged.subscribe((response) => {
         ingredientsChanged = response;
       });
     });
 
-    it('Should remove one ingredient', () => {
+    it('Should remove one ingredient', async() => {
+      shoppingListStorageServiceMock.getIngredients.and.returnValue(of([expected[1]] ));
       service.removeIngreditent(0);
+      expect(shoppingListStorageServiceMock.removeIngredient).toHaveBeenCalled();
       expect(ingredientsChanged.length).toBe(1);
     });
 
     it('Should not remove one ingredient when the index is not good', () => {
-      service.removeIngreditent(45);
+      service.removeIngreditent(-1);
       expect(ingredientsChanged.length).toBe(2);
     });
   });
 
   describe('Add ingredients', () => {
     beforeEach(() => {
-      service = TestBed.get(ShoppingListService);
       service.ingredientsChanged.subscribe((response) => {
         ingredientsChanged = response;
       });
