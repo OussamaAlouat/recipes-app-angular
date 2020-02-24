@@ -18,6 +18,7 @@ const controlName: string = 'name';
     ></app-form-input>
   `,
 })
+
 class HostComponent {
   @ViewChild(FormInputComponent, { static: true })
   child: FormInputComponent;

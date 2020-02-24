@@ -1,11 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { ShoppingListComponent } from './shopping-list.component';
-import { ShoppingListService } from './shopping-list.service';
 import { ShoppingEditComponent } from './shopping-edit/shopping-edit.component';
 import { ButtonComponent } from '../shared/button/button.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { FormInputComponent } from '../shared/form/form-input/form-input.component';
+
+import { ShoppingListService } from './shopping-list.service';
+import { ShoppingListStorageService } from './shopping-list.storage.service';
 
 describe('ShoppingListComponent', () => {
   let component: ShoppingListComponent;
@@ -19,8 +22,11 @@ describe('ShoppingListComponent', () => {
         ButtonComponent,
         FormInputComponent
       ],
-      providers: [ ShoppingListService ],
-      imports: [ReactiveFormsModule]
+      providers: [
+        ShoppingListService,
+        ShoppingListStorageService,
+      ],
+      imports: [ReactiveFormsModule, HttpClientTestingModule]
     })
     .compileComponents();
   }));

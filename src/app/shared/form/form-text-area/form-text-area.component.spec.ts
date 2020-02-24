@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { FormTextAreaComponent } from './form-text-area.component';
 import { Component, ViewChild, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+
+import { FormTextAreaComponent } from './form-text-area.component';
 
 const label: string = 'Description';
 const controlName: string = 'description';

@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { Ingredient } from 'src/app/shared/ingredient.model';
-import { ShoppingListService } from '../shopping-list.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {  FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+
+import { Ingredient } from 'src/app/shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -25,10 +26,11 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       (index: number) => {
         this.editMode = true;
         this.editedItemIndex = index;
-        this.editedItem = this.shoppingListService.getIngredient(index);
-
-        this.shoppingForm.controls.name.setValue(this.editedItem.name);
-        this.shoppingForm.controls.amount.setValue(this.editedItem.amount);
+        this.shoppingListService.getIngredient(index).subscribe((response) => {
+          this.editedItem = response;
+          this.shoppingForm.controls.name.setValue(this.editedItem.name);
+          this.shoppingForm.controls.amount.setValue(this.editedItem.amount);
+        })
       }
     );
   }
@@ -59,7 +61,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   }
 
   onRemove(){
-    this.shoppingListService.removeIngreditent(this.editedItemIndex);
+    this.shoppingListService.removeIngreditent(this.editedItem.id);
     this.editMode = false;
     this.shoppingForm.reset();
   }

@@ -6,6 +6,7 @@ import {  FormGroup } from '@angular/forms';
   templateUrl: './form-input.component.html',
   styleUrls: ['./form-input.component.scss']
 })
+
 export class FormInputComponent implements OnInit {
   @Input() label: string;
   @Input() controlledBy: FormGroup;

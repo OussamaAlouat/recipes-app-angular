@@ -1,13 +1,14 @@
 import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms'
+import { By } from '@angular/platform-browser';
+
+import { ShoppingListService } from '../shopping-list.service';
 
 import { ShoppingEditComponent } from './shopping-edit.component';
-import { ShoppingListService } from '../shopping-list.service';
 import { ButtonComponent } from 'src/app/shared/button/button.component';
 import { FormInputComponent } from 'src/app/shared/form/form-input/form-input.component';
 import { ShoppingListServiceMock } from '../../../__mocks__/ShoppingListMock.service';
-import { By } from '@angular/platform-browser';
 
 describe('ShoppingEditComponent', () => {
   let component: ShoppingEditComponent;

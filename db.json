@@ -40,5 +40,17 @@
       ],
       "id": 3
     }
+  ],
+  "ingredients": [
+    {
+      "amount": "12",
+      "name": "Patatas",
+      "id": 2
+    },
+    {
+      "amount": "12",
+      "name": "Naranjas",
+      "id": 4
+    }
   ]
 }

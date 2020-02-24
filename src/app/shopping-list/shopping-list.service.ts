@@ -1,13 +1,17 @@
-import { Ingredient } from '../shared/ingredient.model';
-import { Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Subject, Observable } from 'rxjs';
 import { find, isNil } from 'lodash';
 
+import { ShoppingListStorageService } from './shopping-list.storage.service';
+import { Ingredient } from '../shared/ingredient.model';
+
+@Injectable()
 export class ShoppingListService {
   ingredientsChanged= new Subject<Ingredient[]>();
   public startedEditing: Subject<number>;
   private ingredients: Ingredient[];
 
-  constructor() {
+  constructor(private shoppingListStorage: ShoppingListStorageService) {
     this.ingredients = [
       new Ingredient('Apples', 5),
       new Ingredient('Tomatoes', 10)
@@ -17,37 +21,49 @@ export class ShoppingListService {
   }
 
   getIngredients() {
-    return this.ingredients.slice();
+    return this.shoppingListStorage.getIngredients();
   }
 
-  getIngredient(index: number) {
-    return this.ingredients[index];
+  getIngredient(index: number): Observable<Ingredient> {
+    return this.shoppingListStorage.getIngredient(index);;
   }
 
   addIngredient(ingredient: Ingredient) {
     if (this.isIngredientValid(ingredient)) {
-      this.ingredients.push(ingredient);
-      this.ingredientsChanged.next(this.ingredients.slice());
+      this.shoppingListStorage.saveIngredient(ingredient)
+        .subscribe((response) => {
+          this.fetchFromServer();
+        })
     }
   }
 
   updateIngredient(index: number, newIngredient: Ingredient) {
-    if (this.ingredients[index] && this.isIngredientValid(newIngredient)) {
-      this.ingredients[index] = newIngredient;
-      this.ingredientsChanged.next(this.ingredients.slice());
+    if (this.isIngredientValid(newIngredient)) {
+      this.shoppingListStorage.updateIngredient(index, newIngredient)
+      .subscribe((response) => {
+        this.fetchFromServer();
+      })
     }
   }
 
   addIngredients(ingredients: Ingredient []) {
     if (ingredients && ingredients.length) {
-      this.ingredients.push(...ingredients);
-      this.ingredientsChanged.next(this.ingredients.slice());
+      for(let i = 0; i < ingredients.length; i++) {
+        const ingredient = ingredients[i];
+        if (this.isIngredientValid(ingredient)) {
+          this.shoppingListStorage.saveIngredient(ingredient).subscribe();
+        }
+      }
+
+      this.fetchFromServer();
     }
   }
 
-  removeIngreditent(index: number) {
-    this.ingredients.splice(index, 1);
-    this.ingredientsChanged.next(this.ingredients.slice());
+  removeIngreditent(id: number) {
+    this.shoppingListStorage.removeIngredient(id)
+      .subscribe(() => {
+        this.fetchFromServer();
+      });
   }
 
   private isIngredientValid(ingredient: Ingredient) {
@@ -60,5 +76,13 @@ export class ShoppingListService {
     }
 
     return true
+  }
+
+  private fetchFromServer() {
+    this.shoppingListStorage.getIngredients()
+      .subscribe((response) => {
+          this.ingredients = response;
+          this.ingredientsChanged.next(response);
+      });
   }
 }

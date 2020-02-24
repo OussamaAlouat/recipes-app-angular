@@ -4,9 +4,11 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
+
 import { RecipeService } from './recipes/recipe.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipeStorageService } from './recipes/recipe.storage.service';
+import { ShoppingListStorageService } from './shopping-list/shopping-list.storage.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -23,6 +25,7 @@ describe('AppComponent', () => {
         RecipeService,
         ShoppingListService,
         RecipeStorageService,
+        ShoppingListStorageService
       ]
     }).compileComponents();
   }));

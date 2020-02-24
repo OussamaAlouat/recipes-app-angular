@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ButtonComponent } from './button.component';
 import { Component, ViewChild, NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
+
+import { ButtonComponent } from './button.component';
 
 @Component({
   selector: 'app-test-button',

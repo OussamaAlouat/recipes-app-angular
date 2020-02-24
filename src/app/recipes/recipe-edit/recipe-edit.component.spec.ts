@@ -2,18 +2,19 @@ import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core
 import { ReactiveFormsModule, FormArray, FormControl } from '@angular/forms';
 import { RecipeEditComponent } from './recipe-edit.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { of } from 'rxjs';
+import { By } from '@angular/platform-browser';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { RecipeService } from '../recipe.service';
 import { ShoppingListService } from '../../shopping-list/shopping-list.service';
-import { of } from 'rxjs';
-import { By } from '@angular/platform-browser';
+import { RecipeStorageService } from '../recipe.storage.service';
+import { ShoppingListStorageService } from 'src/app/shopping-list/shopping-list.storage.service';
+
 import { FormInputComponent } from 'src/app/shared/form/form-input/form-input.component';
 import { FormTextAreaComponent } from 'src/app/shared/form/form-text-area/form-text-area.component';
 import { FormCheckboxesComponent } from 'src/app/shared/form/form-checkboxes/form-checkboxes.component';
 import { ButtonComponent } from 'src/app/shared/button/button.component';
-import { RecipeStorageService } from '../recipe.storage.service';
-import { HttpClient, HttpHandler } from '@angular/common/http';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 // Function needed to validate checkboxes
 export function minSelectedCheckboxes (formArray: FormArray): {required: boolean} | null {
@@ -49,11 +50,10 @@ describe('RecipeEditComponent', () => {
         ButtonComponent,
       ],
       providers: [
-        HttpHandler,
-        HttpClient,
         RecipeService,
         RecipeStorageService,
         ShoppingListService,
+        ShoppingListStorageService,
         {
           provide: ActivatedRoute,
           useValue: {
@@ -64,7 +64,7 @@ describe('RecipeEditComponent', () => {
           provide: Router, useValue: mockRouter,
         }
       ],
-      imports: [ ReactiveFormsModule ]
+      imports: [ ReactiveFormsModule, HttpClientTestingModule ]
     })
     .compileComponents();
   }));
