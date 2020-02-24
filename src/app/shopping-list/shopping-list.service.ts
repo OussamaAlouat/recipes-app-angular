@@ -37,9 +37,11 @@ export class ShoppingListService {
   }
 
   updateIngredient(index: number, newIngredient: Ingredient) {
-    if (this.ingredients[index] && this.isIngredientValid(newIngredient)) {
-      this.ingredients[index] = newIngredient;
-      this.ingredientsChanged.next(this.ingredients.slice());
+    if (this.isIngredientValid(newIngredient)) {
+      this.shoppingListStorage.updateIngredient(index, newIngredient)
+      .subscribe((response) => {
+        this.fetchFromServer();
+      })
     }
   }
 
