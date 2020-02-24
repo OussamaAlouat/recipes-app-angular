@@ -1,10 +1,12 @@
-import { ShoppingListService } from "./shopping-list.service";
-import { TestBed, fakeAsync } from '@angular/core/testing';
-import { Ingredient } from '../shared/ingredient.model';
-import { find } from 'lodash';
-import { ShoppingListStorageService } from './shopping-list.storage.service';
-import { of } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { find } from 'lodash';
+import { of } from 'rxjs';
+
+import { ShoppingListService } from "./shopping-list.service";
+import { ShoppingListStorageService } from './shopping-list.storage.service';
+
+import { Ingredient } from '../shared/ingredient.model';
 
 describe('ShoppingListService', () => {
   let service: ShoppingListService;

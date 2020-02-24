@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { FormCheckboxesComponent } from './form-checkboxes.component';
 import { Component, ViewChild, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormGroup, FormArray, ReactiveFormsModule, FormControl } from '@angular/forms';
+
+import { FormCheckboxesComponent } from './form-checkboxes.component';
 
 const controlName: string = 'typeOfRecipe';
 const types =  [

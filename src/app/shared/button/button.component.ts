@@ -5,6 +5,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss']
 })
+
 export class ButtonComponent implements OnInit {
   @Input() type: string;
   @Input() disable: boolean;

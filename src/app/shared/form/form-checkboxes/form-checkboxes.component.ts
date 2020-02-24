@@ -6,6 +6,7 @@ import { FormGroup, FormControl, FormArray } from '@angular/forms';
   templateUrl: './form-checkboxes.component.html',
   styleUrls: ['./form-checkboxes.component.scss']
 })
+
 export class FormCheckboxesComponent implements OnInit {
   @Input() controlledBy: FormGroup;
   @Input() controlName: string;

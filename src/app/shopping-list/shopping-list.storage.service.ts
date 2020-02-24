@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Ingredient } from '../shared/ingredient.model';
 import { Injectable } from '@angular/core';
+
+import { Ingredient } from '../shared/ingredient.model';
 
 @Injectable()
 export class ShoppingListStorageService{

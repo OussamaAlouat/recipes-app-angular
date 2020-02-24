@@ -18,7 +18,6 @@ describe('Recipes storage service', () => {
     httpMock = TestBed.get(HttpTestingController);
   });
 
-
   it('Should get an array with all recipes', () => {
     service.fetchRecipes().subscribe((recipes: Recipe[]) => {
       expect(recipes.length).toBe(1);
@@ -26,7 +25,6 @@ describe('Recipes storage service', () => {
 
     const req = httpMock.expectOne(`http://localhost:3000/recipes`);
     expect(req.request.method).toBe('GET');
-
     req.flush([recipeItem]);
 
     httpMock.verify();
@@ -45,7 +43,6 @@ describe('Recipes storage service', () => {
 
     const req = httpMock.expectOne(`http://localhost:3000/recipes`);
     expect(req.request.method).toBe('POST');
-
     req.flush({
       name: "test",
       description: "Test desc",

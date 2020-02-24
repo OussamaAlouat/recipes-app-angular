@@ -1,12 +1,14 @@
 import { TestBed } from "@angular/core/testing";
-import { RecipeService } from './recipe.service';
-import { ShoppingListService } from '../shopping-list/shopping-list.service';
-import { Recipe } from './recipe.model';
-import { Ingredient } from '../shared/ingredient.model';
 import { clone } from 'lodash';
-import { RecipeStorageService } from './recipe.storage.service';
 import { of } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+
+import { RecipeService } from './recipe.service';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { RecipeStorageService } from './recipe.storage.service';
+
+import { Recipe } from './recipe.model';
+import { Ingredient } from '../shared/ingredient.model';
 
 describe('RecipeService', () => {
   const recipeItem = new Recipe('A test recipe', 'This is a simple test',
