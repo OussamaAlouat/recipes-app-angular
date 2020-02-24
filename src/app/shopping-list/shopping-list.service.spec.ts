@@ -4,22 +4,31 @@ import { Ingredient } from '../shared/ingredient.model';
 import { find } from 'lodash';
 import { ShoppingListStorageService } from './shopping-list.storage.service';
 import { HttpClient, HttpHandler } from '@angular/common/http';
+import { of } from 'rxjs';
 
 describe('ShoppingListService', () => {
   let service: ShoppingListService;
   let ingredientsChanged;
+  let ShoppingListStorageServiceMock;
+
   const expected = [
     new Ingredient('Apples', 5),
     new Ingredient('Tomatoes', 10)
   ];
 
   beforeEach( async() => {
+    ShoppingListStorageServiceMock = jasmine.createSpyObj(['saveIngredient', '']);
+    ShoppingListStorageServiceMock.saveIngredient.and.returnValue(of({ ...expected[0] }));
+
     TestBed.configureTestingModule({
       providers: [
         ShoppingListService,
-        ShoppingListStorageService,
         HttpClient,
-        HttpHandler
+        HttpHandler,
+        {
+          provide: ShoppingListStorageService,
+          useValue: ShoppingListStorageServiceMock
+        }
       ]
     });
 
