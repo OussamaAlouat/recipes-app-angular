@@ -1,6 +1,7 @@
 import { Recipe } from './recipe.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class RecipeStorageService {
@@ -12,5 +13,20 @@ export class RecipeStorageService {
 
   deleteRecipe(id: number) {
     return this.http.delete('http://localhost:3000/recipes/'+ id)
+  }
+
+  fetchRecipes() {
+    return this.http.get<Recipe[]>('http://localhost:3000/recipes')
+    .pipe(
+      map(recipes => {
+        return recipes.map(recipe => {
+          return { ...recipe, ingredients: recipe.ingredients ? recipe.ingredients : []}
+        });
+      })
+    );
+  }
+
+  updateRecipe(id: number, recipe: Recipe) {
+    return this.http.put('http://localhost:3000/recipes/' + id, recipe);
   }
 }
